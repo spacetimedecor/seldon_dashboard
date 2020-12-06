@@ -1,6 +1,6 @@
 import {io} from 'socket.io-client';
-
-const socket = io("http://localhost:3231", {
+const PORT = process.env.PORT || 3231
+const socket = io(`https://seldon-dashboard.herokuapp.com:${PORT}`, {
     transports: ['websocket', 'polling']
 });
 
