@@ -1,0 +1,47 @@
+{
+  "name": "seldon_dashboard",
+  "version": "1.2.1",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "@material-ui/styles": "latest",
+    "eslint": "latest",
+    "express": "latest",
+    "fontsource-roboto": "latest",
+    "lodash": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "latest",
+    "react-scripts": "latest",
+    "socket.io": "latest",
+    "socket.io-client": "latest"
+  },
+  "scripts": {
+    "start": "node src/server/index.js",
+    "dev": "concurrently 'npm run react' 'npm run server'",
+    "react": "react-scripts start",
+    "server": "nodemon src/server/index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.1",
+    "eslint-plugin-material-ui": "^1.0.1",
+    "eslint-plugin-react": "^7.21.5",
+    "nodemon": "^1.19.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
