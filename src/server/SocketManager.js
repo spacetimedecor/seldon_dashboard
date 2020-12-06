@@ -1,13 +1,15 @@
+const Machine = require('./machine/index')
+const machineOptions = require('./machine/machineOptions.js')
+
 let tick = 0;
+
 module.exports = client => {
-	setInterval(() => {
+	Machine.setupMachines(machineOptions);
+	Machine.startMachines(() => {
 		console.debug("Tick: ", tick);
-		client.emit('testMessage', {
-			name: 'name value',
-			value: 'value value',
-			tick: tick++
-		});
-	}, 1000);
+		client.emit('MachineValues', Machine.GetAllMachineValues());
+		tick++;
+	})
 }
 
 // const io = require('./index.js').io

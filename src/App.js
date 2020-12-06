@@ -1,13 +1,16 @@
 import './App.css';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import socket from './services/clientSocket'
 
 function App() {
-  // 1. listen for a cpu event and update the state
+
+  const [MachineValues, setMachineValues] = useState([0]);
+
   useEffect(() => {
-    socket.on('testMessage', o => {
+    socket.on('MachineValues', o => {
       console.log(o);
+      setMachineValues(o);
     });
   }, []);
 
@@ -16,6 +19,12 @@ function App() {
       <Button variant="contained" color="primary">
         Hello World
       </Button>
+      {MachineValues.map(
+        (MachineValue, i) =>
+          <div key={i}>
+            {MachineValue.Name}
+          </div>)
+      }
     </div>
   );
 }
