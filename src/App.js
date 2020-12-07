@@ -5,7 +5,7 @@ import socket from './services/clientSocket'
 
 function App() {
 
-  const [MachineValues, setMachineValues] = useState([0]);
+  const [MachineValues, setMachineValues] = useState([]);
 
   useEffect(() => {
     socket.on('MachineValues', o => {
@@ -21,7 +21,7 @@ function App() {
       </Button>
       {MachineValues.map(
         (MachineValue, i) =>
-          <div key={i}>
+          <div key={`MachineValue-${i}`}>
             {MachineValue.Name}
           </div>)
       }
