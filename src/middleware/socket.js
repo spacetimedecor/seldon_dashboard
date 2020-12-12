@@ -1,61 +1,63 @@
-import * as actions from "../modules/websocket";
-import { updateGame } from "../modules/game";
+import * as actions from "../store/actions";
+import {
+  NEW_MESSAGE,
+  RECEIVE_MACHINE_UPDATES,
+  UPDATE_MACHINE_VALUES,
+  WS_CONNECT,
+  WS_DISCONNECT
+} from "../store/actionTypes";
+import {updateMachineValues} from "../store/actions";
+import {io} from "socket.io-client";
+import {URL} from "../config";
 
 const socketMiddleware = () => {
   let socket = null;
 
-  const onOpen = (store) => (event) => {
-    console.log("websocket open", event.target.url);
-    store.dispatch(actions.wsConnected(event.target.url));
-  };
-
-  const onClose = (store) => () => {
-    store.dispatch(actions.wsDisconnected());
-  };
-
   const onMessage = (store) => (event) => {
-    const payload = JSON.parse(event.data);
-    console.log("receiving server message");
-
-    switch (payload.type) {
-      case "update_game_players":
-        store.dispatch(updateGame(payload.game, payload.current_player));
+    switch (event.type) {
+      case RECEIVE_MACHINE_UPDATES:
+        store.dispatch(updateMachineValues(event.MachineValues));
         break;
       default:
         break;
     }
-  };
+  }
+
+  const onDisconnect = (store) => () => {
+    store.dispatch(actions.wsDisconnected(URL));
+  }
+
+  const onConnect = (store) => () => {
+    console.log("websocket open", URL);
+    store.dispatch(actions.wsConnected(URL));
+  }
 
   // the middleware part of this function
   return (store) => (next) => (action) => {
     switch (action.type) {
-      case "WS_CONNECT":
-        if (socket !== null) {
-          socket.close();
-        }
+      case WS_CONNECT:
+        socket?.disconnect();
+        socket?.removeAllListeners();
+        socket = io.connect(URL, {
+          transports: ["websocket", "polling"],
+        });
 
-        // connect to the remote host
-        socket = new WebSocket(action.host);
-
-        // websocket handlers
-        socket.onmessage = onMessage(store);
-        socket.onclose = onClose(store);
-        socket.onopen = onOpen(store);
-
+        socket.on('connect', onConnect(store));
+        socket.on("message", onMessage(store));
+        socket.on('disconnect', onDisconnect(store));
         break;
-      case "WS_DISCONNECT":
-        if (socket !== null) {
-          socket.close();
-        }
+      case WS_DISCONNECT:
+        socket?.disconnect();
+        socket?.removeAllListeners();
         socket = null;
         console.log("websocket closed");
         break;
-      case "NEW_MESSAGE":
-        console.log("sending a message", action.msg);
-        socket.send(
-          JSON.stringify({ command: "NEW_MESSAGE", message: action.msg })
-        );
-        break;
+      // case "TO_SERVER":
+      //   console.log("sending a message", action.msg);
+      //   socket.send(
+      //     JSON.stringify({ command: "NEW_MESSAGE", message: action.msg })
+      //   );
+      //   break;
       default:
         console.log("the next action:", action);
         return next(action);

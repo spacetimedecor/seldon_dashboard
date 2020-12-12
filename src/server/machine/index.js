@@ -2,15 +2,24 @@ const Program = require("./program");
 
 module.exports = class Machine {
 
-  static timer;
+  // Members
+  static timer = null;
+  static onTick = null;
 
+  // Machines Controllers
   static setupMachines(machinesOptions){
     this.machines = machinesOptions
       .map(machineOptions => new Machine(machineOptions))
   }
 
-  static startMachines(callback){
-    Machine.timer = setInterval(() => callback(), 1000);
+  static startMachines(){
+    Machine.timer = setInterval(() => {
+      Machine.onTick?.(this.GetAllMachineValues())
+    }, 1000);
+  }
+
+  static setOnTick(callback){
+    Machine.onTick = callback
   }
 
   static stopMachines(){
@@ -22,6 +31,7 @@ module.exports = class Machine {
       .map(machine => machine.getValues())
   }
 
+  // Machine instance
   constructor(machineOptions){
     this.options = machineOptions;
     this.initialise();
@@ -39,6 +49,4 @@ module.exports = class Machine {
       StartTime: this.options.StartTime,
     }
   }
-
-
 }

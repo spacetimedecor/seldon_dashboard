@@ -21,5 +21,6 @@
         "material-ui"
     ],
     "rules": {
+        "no-unused-vars": "off"
     }
 }

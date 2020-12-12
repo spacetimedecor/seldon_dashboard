@@ -9,10 +9,16 @@ const PORT = process.env.REACT_APP_PORT || 3231;
 app.use(express.static(__dirname + "/../../build"));
 
 io.on("connection", (client) => {
-  machineManager(client);
+  machineManager.connect(client);
 });
 
-io.on("test", (e) => {console.log(e)})
+io.on("disconnect", () => {
+  machineManager.disconnect();
+});
+
+io.on("test", (e) => {
+  console.log(e);
+});
 
 server.listen(PORT, () => {
   console.log("Connected to port:" + PORT);
