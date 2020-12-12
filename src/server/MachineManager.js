@@ -9,7 +9,7 @@ module.exports.connect = (client) => {
       type: "RECEIVE_MACHINE_UPDATES",
       MachineValues
     });
-  })
+  });
 };
 
 module.exports.disconnect = () => {

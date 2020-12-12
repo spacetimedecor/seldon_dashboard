@@ -12,11 +12,11 @@ app.use(express.static(__dirname + "/../../build"));
 io.on("connection", (client) => {
   console.log("GOT HERE 1")
   machineManager.connect(client);
-});
-
-io.on("disconnect", () => {
-  console.log("GOT HERE 2")
-  machineManager.disconnect();
+  client.on("disconnect", () => {
+    console.log("GOT HERE 2")
+    machineManager.disconnect();
+    client.emit("message", { type: 'WS_DISCONNECTED' })
+  });
 });
 
 io.on("to_server", (e) => {
