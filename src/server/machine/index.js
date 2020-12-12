@@ -34,10 +34,11 @@ module.exports = class Machine {
 
   getValues = () => {
     return {
-      ProgramValues: this.programs
-        .map(program => program.getValues()),
+      ProgramValues: this.programs.map(program => program.getValues()),
       Name: this.options.Name,
       StartTime: this.options.StartTime,
     }
   }
+
+
 }

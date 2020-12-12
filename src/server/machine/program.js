@@ -18,13 +18,21 @@ module.exports = class Program {
   }
 
   * CPU() {
-    const noise = new noiseGenerator();
-    yield noise.gen;
+    let i = 0;
+    const noise = new Noise(Math.random());
+    while (true) {
+      yield Math.abs(noise.perlin2(i, i) * 100);
+      i += 0.01;//<-- set these in settings
+    }
   }
 
   * Memory() {
-    const noise = new noiseGenerator();
-    yield noise.gen;
+    let i = 0;
+    const noise = new Noise(Math.random());
+    while (true) {
+      yield Math.abs(noise.perlin2(i, i) * 100);
+      i += 0.01;//<-- set these in settings
+    }
   }
 }
 

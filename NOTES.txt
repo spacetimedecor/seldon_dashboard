@@ -1,0 +1,17 @@
+If you know exactly which part of your app needs to leverage <SocketManager />,
+it will make more sense to wrap the isolated components rather than the entire application.
+
+// Class components with websocket:
+import { SocketContext } from '../SocketManager';
+export const MyClassComponent extends React.Component {
+   static contextType = SocketContext;
+   ...
+}
+
+// Functional components with websocket:
+import { useWebsocket } from '../SocketManager';
+const MyFunctionalComponent = () => {
+   const priceData = useWebsocket();
+   ...
+}
+
