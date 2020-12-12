@@ -1,7 +1,7 @@
 import "../styles/App.css";
 import React, {useEffect} from "react";
 import Button from "@material-ui/core/Button";
-import {wsConnect} from "../store/actions";
+import {wsConnect, wsDisconnect} from "../store/actions";
 import {connect} from "react-redux";
 import {URL} from '../config';
 import PropTypes from 'prop-types';
@@ -10,6 +10,9 @@ function App(props) {
 
   useEffect(() => {
     props.wsConnect(URL);
+    return () => {
+      props.wsDisconnect(URL);
+    }
   }, [])
 
   return (
@@ -22,11 +25,13 @@ function App(props) {
 }
 
 App.propTypes = {
-  wsConnect: PropTypes.func.isRequired
+  wsConnect: PropTypes.func.isRequired,
+  wsDisconnect: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = {
-  wsConnect
+  wsConnect,
+  wsDisconnect
 };
 
 export default connect(null, mapDispatchToProps)(App);

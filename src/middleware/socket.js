@@ -1,8 +1,6 @@
 import * as actions from "../store/actions";
 import {
-  NEW_MESSAGE,
   RECEIVE_MACHINE_UPDATES,
-  UPDATE_MACHINE_VALUES,
   WS_CONNECT,
   WS_DISCONNECT
 } from "../store/actionTypes";
