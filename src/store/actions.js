@@ -5,6 +5,11 @@ export const updateMachineValues = (MachineValues) => ({
   MachineValues,
 });
 
+export const messageToServer = (Message) => ({
+  type: actionTypes.TO_SERVER,
+  Message
+});
+
 export const test = () => ({ type: actionTypes.TEST });
 
 export const wsConnect = host => ({ type: actionTypes.WS_CONNECT, host });

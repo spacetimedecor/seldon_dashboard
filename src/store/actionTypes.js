@@ -7,3 +7,4 @@ export const WS_CONNECTED = 'WS_CONNECTED';
 export const WS_DISCONNECT = 'WS_DISCONNECT';
 export const WS_DISCONNECTED = 'WS_DISCONNECTED';
 export const NEW_MESSAGE = 'NEW_MESSAGE';
+export const TO_SERVER = 'TO_SERVER';

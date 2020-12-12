@@ -44,11 +44,9 @@ render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        {/*<SocketManager>*/}
         <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>
-        {/*</SocketManager>*/}
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

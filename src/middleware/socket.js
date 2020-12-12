@@ -1,6 +1,6 @@
 import * as actions from "../store/actions";
 import {
-  RECEIVE_MACHINE_UPDATES,
+  RECEIVE_MACHINE_UPDATES, TO_SERVER,
   WS_CONNECT,
   WS_DISCONNECT
 } from "../store/actionTypes";
@@ -9,6 +9,7 @@ import {io} from "socket.io-client";
 import {URL} from "../config";
 
 const socketMiddleware = () => {
+
   let socket = null;
 
   const onMessage = (store) => (event) => {
@@ -34,8 +35,6 @@ const socketMiddleware = () => {
   return (store) => (next) => (action) => {
     switch (action.type) {
       case WS_CONNECT:
-        socket?.disconnect();
-        socket?.removeAllListeners();
         socket = io.connect(URL, {
           transports: ["websocket", "polling"],
         });
@@ -43,19 +42,19 @@ const socketMiddleware = () => {
         socket.on('connect', onConnect(store));
         socket.on("message", onMessage(store));
         socket.on('disconnect', onDisconnect(store));
+        socket.emit('terminate');
         break;
       case WS_DISCONNECT:
-        socket?.disconnect();
+        console.log('Got here, socket is: ', socket);
         socket?.removeAllListeners();
+        socket?.disconnect();
+        socket?.destroy();
         socket = null;
         console.log("websocket closed");
         break;
-      // case "TO_SERVER":
-      //   console.log("sending a message", action.msg);
-      //   socket.send(
-      //     JSON.stringify({ command: "NEW_MESSAGE", message: action.msg })
-      //   );
-      //   break;
+      case TO_SERVER:
+        socket.emit('to_server', action.payload);
+        break;
       default:
         console.log("the next action:", action);
         return next(action);

@@ -10,15 +10,17 @@ const PORT = process.env.PORT || 3231;
 app.use(express.static(__dirname + "/../../build"));
 
 io.on("connection", (client) => {
+  console.log("GOT HERE 1")
   machineManager.connect(client);
 });
 
 io.on("disconnect", () => {
+  console.log("GOT HERE 2")
   machineManager.disconnect();
 });
 
-io.on("test", (e) => {
-  console.log(e);
+io.on("to_server", (e) => {
+  console.log("to_server", e);
 });
 
 server.listen(PORT, () => {
