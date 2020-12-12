@@ -14,7 +14,9 @@ module.exports = class Machine {
 
   static startMachines(){
     Machine.timer = setInterval(() => {
-      Machine.onTick?.(this.GetAllMachineValues())
+      if (Machine.onTick !== null){
+        Machine.onTick(this.GetAllMachineValues())
+      }
     }, 1000);
   }
 
