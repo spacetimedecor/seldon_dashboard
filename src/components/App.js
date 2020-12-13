@@ -9,8 +9,7 @@ import PropTypes from "prop-types";
 function App(props) {
 
   useEffect(() => {
-    // props.wsDisconnect(URL);
-    // props.wsConnect(URL);
+
     return () => {
       props.wsDisconnect(URL);
     };

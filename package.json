@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "node src/server/index.js",
-    "dev": "concurrently 'npm run react' 'npm run server' export REACT_APP_NODE_ENV=development",
+    "dev": "concurrently 'npm run react' 'npm run server' export NODE_ENV=development",
     "react": "react-scripts start",
     "server": "nodemon src/server/index.js",
     "build": "react-scripts build",

@@ -2,7 +2,7 @@ import * as actions from "../store/actions";
 import {
   RECEIVE_MACHINE_UPDATES, TO_SERVER,
   WS_CONNECT,
-  WS_DISCONNECT
+  WS_DISCONNECT, WS_DISCONNECTED
 } from "../store/actionTypes";
 import {updateMachineValues} from "../store/actions";
 import {io} from "socket.io-client";
@@ -13,6 +13,7 @@ const socketMiddleware = () => {
   let socket = null;
 
   const onMessage = (store) => (event) => {
+    //console.log("message from server: ", event)
     switch (event.type) {
       case RECEIVE_MACHINE_UPDATES:
         store.dispatch(updateMachineValues(event.MachineValues));
@@ -22,13 +23,16 @@ const socketMiddleware = () => {
     }
   }
 
-  const onDisconnect = (store) => () => {
-    store.dispatch(actions.wsDisconnected(URL));
+  const onConnect = () => {
+    console.log("websocket open", URL);
   }
 
-  const onConnect = (store) => () => {
-    console.log("websocket open", URL);
-    store.dispatch(actions.wsConnected(URL));
+  const disconnect = () => {
+    socket?.removeAllListeners();
+    socket?.disconnect();
+    socket?.close();
+    socket?.destroy();
+    socket = null;
   }
 
   // the middleware part of this function
@@ -38,25 +42,18 @@ const socketMiddleware = () => {
         socket = io.connect(URL, {
           transports: ["websocket", "polling"],
         });
-
-        socket.on('connect', onConnect(store));
+        socket.on('connect', onConnect);
         socket.on("message", onMessage(store));
-        socket.on('disconnect', onDisconnect(store));
-        socket.emit('terminate');
         break;
       case WS_DISCONNECT:
-        console.log('Got here, socket is: ', socket);
-        socket?.removeAllListeners();
-        socket?.disconnect();
-        socket?.destroy();
-        socket = null;
+        disconnect();
         console.log("websocket closed");
         break;
       case TO_SERVER:
         socket.emit('to_server', action.payload);
         break;
       default:
-        console.log("the next action:", action);
+        // console.log("the next action:", action);
         return next(action);
     }
   };
