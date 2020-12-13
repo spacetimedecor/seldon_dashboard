@@ -23,4 +23,5 @@ export const addMachine = payload => ({
 export const test = () => ({ type: actionTypes.TEST });
 
 export const wsConnect = host => ({ type: actionTypes.WS_CONNECT, host });
+export const wsSetup = host => ({ type: actionTypes.WS_SETUP, host });
 export const wsDisconnect = host => ({ type: actionTypes.WS_DISCONNECT, host });

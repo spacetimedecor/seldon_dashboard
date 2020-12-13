@@ -3,7 +3,7 @@ import {
   ADD_MACHINE,
   RECEIVE_MACHINE_UPDATES, SET_POLL_SPEED, TO_SERVER,
   WS_CONNECT,
-  WS_DISCONNECT, WS_DISCONNECTED
+  WS_DISCONNECT, WS_DISCONNECTED, WS_SETUP
 } from "../store/actionTypes";
 import {updateMachineValues} from "../store/actions";
 import {io} from "socket.io-client";
@@ -24,10 +24,6 @@ const socketMiddleware = () => {
     }
   }
 
-  const onConnect = () => {
-    console.log("websocket open", URL);
-  }
-
   const disconnect = () => {
     socket?.removeAllListeners();
     socket?.disconnect();
@@ -35,19 +31,23 @@ const socketMiddleware = () => {
     socket?.destroy();
     socket = null;
   }
-
   // the middleware part of this function
   return (store) => (next) => (action) => {
     switch (action.type) {
-      case WS_CONNECT:
+      case WS_SETUP:
         socket = io.connect(URL, {
           transports: ["websocket", "polling"],
         });
-        socket.on('connect', onConnect);
         socket.on("message", onMessage(store));
+        socket?.emit(WS_SETUP);
+        break;
+      case WS_CONNECT:
+        socket?.emit(WS_CONNECT);
+        console.log("websocket open", URL);
         break;
       case WS_DISCONNECT:
-        disconnect();
+        socket?.emit(WS_DISCONNECT);
+        // disconnect();
         console.log("websocket closed");
         break;
       case SET_POLL_SPEED:

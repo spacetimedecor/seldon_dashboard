@@ -13,7 +13,20 @@ module.exports = class Machine {
   // Machines Controllers
   static setupMachines(){
     Machine.machines = defaultSettings
-      .map(machineSetting => new Machine(machineSetting))
+      .map(machineSetting => new Machine(machineSetting));
+
+    const func = () => {
+      if (
+        Machine.onTick !== null &&
+        Machine.running === true
+      ){
+        console.log(1);
+        Machine.onTick(this.GetAllMachineValues())
+      }
+      setTimeout(func, Machine.pollTime);
+    }
+
+    setTimeout(func, Machine.pollTime);
   }
 
   static createMachineState(machineSetting){
@@ -34,6 +47,7 @@ module.exports = class Machine {
   }
 
   static addMachine(machineSetting){
+    console.log("ADD_MACHINE", machineSetting);
     Machine.machines =
       [
         ...Machine.machines,
@@ -59,18 +73,6 @@ module.exports = class Machine {
 
   static startMachines(){
     Machine.running = true;
-
-    const func = () => {
-      if (
-        Machine.onTick !== null &&
-        Machine.running === true
-      ){
-        Machine.onTick(this.GetAllMachineValues())
-      }
-      setTimeout(func, Machine.pollTime);
-    }
-
-    setTimeout(func, Machine.pollTime);
   }
 
   // Setters
@@ -79,6 +81,7 @@ module.exports = class Machine {
   }
 
   static setPollSpeed(to){
+    console.log("SET_POLL_SPEED", to);
     Machine.pollTime = to
   }
 

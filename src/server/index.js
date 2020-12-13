@@ -11,28 +11,13 @@ app.use(express.static(__dirname + "/../../build"));
 
 io.on("connection", (socket) => {
 
-  machineManager.connect(socket);
-
-  socket.on("disconnect", () => {
-    machineManager.disconnect();
-  });
-
-  socket.on("TO_SERVER", (e) => {
-    console.log("TO_SERVER", e);
-  });
-
-  socket.on("SET_POLL_SPEED", (e) => {
-    console.log("SET_POLL_SPEED", e);
-    machineManager.setPollSpeed(e)
-  });
-
-  socket.on("ADD_MACHINE", (e) => {
-    console.log("ADD_MACHINE", e);
-    machineManager.addMachine(e)
-  });
+  socket.on("WS_SETUP", () => { machineManager.setup(socket) });
+  socket.on("WS_CONNECT", () => { machineManager.connect(); });
+  socket.on("WS_DISCONNECT", () => { machineManager.disconnect(); });
+  socket.on("TO_SERVER", (e) => { console.log("TO_SERVER", e); });
+  socket.on("SET_POLL_SPEED", (e) => { machineManager.setPollSpeed(e) });
+  socket.on("ADD_MACHINE", (e) => { machineManager.addMachine(e) });
 });
-
-
 
 server.listen(PORT, () => {
   console.log("Connected to port:" + PORT);

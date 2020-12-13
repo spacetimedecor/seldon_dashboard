@@ -2,7 +2,7 @@ import "../styles/App.css";
 import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Slider from '@material-ui/core/Slider';
-import {setPollSpeed, wsConnect, wsDisconnect, addMachine} from "../store/actions";
+import {setPollSpeed, wsConnect, wsDisconnect, addMachine, wsSetup} from "../store/actions";
 import { connect } from "react-redux";
 import { URL } from "../config";
 import PropTypes from "prop-types";
@@ -11,14 +11,15 @@ import Layout from "./Layout";
 function App(props) {
 
   useEffect(() => {
-
+    props.wsDisconnect(URL);
+    props.wsSetup(URL);
     return () => {
       props.wsDisconnect(URL);
     };
   }, []);
 
   function valuetext(value) {
-    return `${value}°C`;
+    return `${value}ms`;
   }
 
   return (
@@ -76,6 +77,7 @@ App.propTypes = {
   wsDisconnect: PropTypes.func.isRequired,
   addMachine: PropTypes.func.isRequired,
   setPollSpeed: PropTypes.func.isRequired,
+  wsSetup: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
@@ -83,6 +85,7 @@ const mapDispatchToProps = {
   wsDisconnect,
   addMachine,
   setPollSpeed,
+  wsSetup
 };
 
 export default connect(null, mapDispatchToProps)(App);
