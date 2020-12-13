@@ -6,7 +6,6 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -16,11 +15,7 @@ import DesktopMacOutlinedIcon from '@material-ui/icons/DesktopMacOutlined';
 import PropTypes from "prop-types";
 import {drawerStyles} from "../styles/theme";
 import {connect} from "react-redux";
-import { Link, Route } from "react-router-dom";
-
-import Home from '../pages/Home';
-import Machine from '../pages/Machine';
-
+import { Link } from "react-router-dom";
 
 const Sidebar = (props) => {
 
