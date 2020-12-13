@@ -5,9 +5,14 @@ export const updateMachineValues = (MachineValues) => ({
   MachineValues,
 });
 
-export const messageToServer = (Message) => ({
+export const messageToServer = (payload) => ({
   type: actionTypes.TO_SERVER,
-  Message
+  payload
+});
+
+export const setPollSpeed = (payload) => ({
+  type: actionTypes.SET_POLL_SPEED,
+  payload
 });
 
 export const test = () => ({ type: actionTypes.TEST });

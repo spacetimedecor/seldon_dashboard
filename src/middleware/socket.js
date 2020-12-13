@@ -1,6 +1,6 @@
 import * as actions from "../store/actions";
 import {
-  RECEIVE_MACHINE_UPDATES, TO_SERVER,
+  RECEIVE_MACHINE_UPDATES, SET_POLL_SPEED, TO_SERVER,
   WS_CONNECT,
   WS_DISCONNECT, WS_DISCONNECTED
 } from "../store/actionTypes";
@@ -49,11 +49,13 @@ const socketMiddleware = () => {
         disconnect();
         console.log("websocket closed");
         break;
+      case SET_POLL_SPEED:
+        socket?.emit(SET_POLL_SPEED, action.payload);
+        break;
       case TO_SERVER:
-        socket.emit('to_server', action.payload);
+        socket?.emit(TO_SERVER, action.payload);
         break;
       default:
-        // console.log("the next action:", action);
         return next(action);
     }
   };

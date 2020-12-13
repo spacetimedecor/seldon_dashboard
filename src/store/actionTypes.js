@@ -5,3 +5,4 @@ export const WS_CONNECT = 'WS_CONNECT';
 export const WS_DISCONNECT = 'WS_DISCONNECT';
 export const NEW_MESSAGE = 'NEW_MESSAGE';
 export const TO_SERVER = 'TO_SERVER';
+export const SET_POLL_SPEED = 'SET_POLL_SPEED';

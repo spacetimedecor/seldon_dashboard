@@ -15,3 +15,7 @@ module.exports.connect = (client) => {
 module.exports.disconnect = () => {
   Machine.stopMachines();
 }
+
+module.exports.setPollSpeed = (to) => {
+  Machine.setPollSpeed(to);
+}

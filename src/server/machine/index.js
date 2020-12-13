@@ -5,6 +5,7 @@ module.exports = class Machine {
   // Members
   static timer = null;
   static onTick = null;
+  static pollTime = 1000;
 
   // Machines Controllers
   static setupMachines(machinesOptions){
@@ -12,22 +13,32 @@ module.exports = class Machine {
       .map(machineOptions => new Machine(machineOptions))
   }
 
+  static stopMachines(){
+    // clearInterval(Machine.timer)
+  }
+
   static startMachines(){
-    Machine.timer = setInterval(() => {
+
+    const func = () => {
       if (Machine.onTick !== null){
         Machine.onTick(this.GetAllMachineValues())
       }
-    }, 1000);
+      setTimeout(func, Machine.pollTime);
+    }
+
+    setTimeout(func, Machine.pollTime);
   }
 
+  // Setters
   static setOnTick(callback){
     Machine.onTick = callback
   }
 
-  static stopMachines(){
-    clearInterval(Machine.timer)
+  static setPollSpeed(to){
+    Machine.pollTime = to
   }
 
+  // Getters:
   static GetAllMachineValues(){
     return this.machines
       .map(machine => machine.getValues())
