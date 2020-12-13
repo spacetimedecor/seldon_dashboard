@@ -1,26 +1,70 @@
+const { v4: uuid } = require('uuid');
 const Program = require("./program");
+const defaultSettings = require('./defaultSettings.js')
 
 module.exports = class Machine {
 
   // Members
-  static timer = null;
+  static running = false;
   static onTick = null;
   static pollTime = 500;
+  static machines = [];
 
   // Machines Controllers
-  static setupMachines(machinesOptions){
-    this.machines = machinesOptions
-      .map(machineOptions => new Machine(machineOptions))
+  static setupMachines(){
+    Machine.machines = defaultSettings
+      .map(machineSetting => new Machine(machineSetting))
+  }
+
+  static createMachineState(machineSetting){
+    return {
+      ID: uuid(),
+      Name: machineSetting.Name,
+      StartTime: new Date().getTime(),
+      Programs: machineSetting.Programs
+        .map(program => {
+            return {
+              ID: uuid(),
+              Name: program.Name,
+              StartTime: new Date().getTime(),
+            }
+          }
+        )
+    }
+  }
+
+  static addMachine(machineSetting){
+    Machine.machines =
+      [
+        ...Machine.machines,
+        new Machine(
+          machineSetting !== null ?
+            machineSetting
+              :
+            {
+              Name: `Machine ${Machine.machines.length + 1}`,
+              Programs: [
+                {
+                  Name: 'Program 1'
+                }
+              ]
+            }
+          )
+      ]
   }
 
   static stopMachines(){
-    // clearInterval(Machine.timer)
+    Machine.running = false;
   }
 
   static startMachines(){
+    Machine.running = true;
 
     const func = () => {
-      if (Machine.onTick !== null){
+      if (
+        Machine.onTick !== null &&
+        Machine.running === true
+      ){
         Machine.onTick(this.GetAllMachineValues())
       }
       setTimeout(func, Machine.pollTime);
@@ -40,26 +84,26 @@ module.exports = class Machine {
 
   // Getters:
   static GetAllMachineValues(){
-    return this.machines
+    return Machine.machines
       .map(machine => machine.getValues())
   }
 
   // Machine instance
-  constructor(machineOptions){
-    this.options = machineOptions;
+  constructor(machineSetting){
+    this.machineSetting = Machine.createMachineState(machineSetting)
     this.initialise();
   }
 
   initialise(){
-    this.programs = this.options.Programs
+    this.programs = this.machineSetting.Programs
       .map(programOptions => new Program(programOptions))
   }
 
   getValues = () => {
     return {
       ProgramValues: this.programs.map(program => program.getValues()),
-      Name: this.options.Name,
-      StartTime: this.options.StartTime,
+      Name: this.machineSetting.Name,
+      StartTime: this.machineSetting.StartTime,
     }
   }
 }

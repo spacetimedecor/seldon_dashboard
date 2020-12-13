@@ -15,6 +15,11 @@ export const setPollSpeed = (payload) => ({
   payload
 });
 
+export const addMachine = payload => ({
+  type: actionTypes.ADD_MACHINE,
+  payload
+});
+
 export const test = () => ({ type: actionTypes.TEST });
 
 export const wsConnect = host => ({ type: actionTypes.WS_CONNECT, host });

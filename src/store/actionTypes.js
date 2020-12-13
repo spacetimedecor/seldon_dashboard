@@ -6,3 +6,4 @@ export const WS_DISCONNECT = 'WS_DISCONNECT';
 export const NEW_MESSAGE = 'NEW_MESSAGE';
 export const TO_SERVER = 'TO_SERVER';
 export const SET_POLL_SPEED = 'SET_POLL_SPEED';
+export const ADD_MACHINE = 'ADD_MACHINE';
