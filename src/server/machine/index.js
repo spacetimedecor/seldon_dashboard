@@ -107,6 +107,7 @@ module.exports = class Machine {
       ProgramValues: this.programs.map(program => program.getValues()),
       Name: this.machineSetting.Name,
       StartTime: this.machineSetting.StartTime,
+      ID: this.machineSetting.ID,
     }
   }
 }

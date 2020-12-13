@@ -13,11 +13,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
+import DesktopMacOutlinedIcon from '@material-ui/icons/DesktopMacOutlined';
 import PropTypes from "prop-types";
 import {drawerStyles} from "../styles/theme";
-import { makeStyles } from '@material-ui/styles';
+import {addMachine, setPollSpeed, wsConnect, wsDisconnect, wsSetup} from "../store/actions";
+import {connect} from "react-redux";
+import {DesktopMacOutlined} from "@material-ui/icons";
 
-const MiniDrawer = (props) => {
+
+const Sidebar = (props) => {
 
   const classes = drawerStyles();
 
@@ -49,14 +53,22 @@ const MiniDrawer = (props) => {
             ))}
           </List>
           <Divider />
-          {/*<List>*/}
-          {/*  {['All mail', 'Trash', 'Spam'].map((text, index) => (*/}
-          {/*    <ListItem button key={text}>*/}
-          {/*      <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>*/}
-          {/*      <ListItemText primary={text} />*/}
-          {/*    </ListItem>*/}
-          {/*  ))}*/}
-          {/*</List>*/}
+          <List>
+            {/*{['All mail', 'Trash', 'Spam'].map((text, index) => (*/}
+            {/*  <ListItem button key={text}>*/}
+            {/*    <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>*/}
+            {/*    <ListItemText primary={text} />*/}
+            {/*  </ListItem>*/}
+            {/*))}*/}
+            {props.machines && props.machines.map((machine) => {
+              return <ListItem button key={machine.ID}>
+                <ListItemIcon>
+                  <DesktopMacOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary={machine.Name} />
+              </ListItem>
+            })}
+          </List>
         </div>
       </Drawer>
       <main className={classes.content}>
@@ -67,13 +79,23 @@ const MiniDrawer = (props) => {
   );
 }
 
-MiniDrawer.propTypes = {
+Sidebar.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element)
-  ]).isRequired
+  ]).isRequired,
+  machines: PropTypes.array
 }
 
-export default MiniDrawer;
+const mapStateToProps = (state, ownProps) => ({
+  machines: state.MachineValues ? state.MachineValues.map(MachineValue => {
+    return {
+      Name: MachineValue.Name,
+      ID: MachineValue.ID
+    }
+  }) : []
+})
+
+export default connect(mapStateToProps, null)(Sidebar);

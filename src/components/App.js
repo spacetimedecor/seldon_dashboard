@@ -21,6 +21,7 @@ function App(props) {
   useEffect(() => {
     props.wsDisconnect(URL);
     props.wsSetup(URL);
+    props.wsConnect(URL);
     return () => {
       props.wsDisconnect(URL);
     };
