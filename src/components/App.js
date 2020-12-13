@@ -2,7 +2,13 @@ import "../styles/App.css";
 import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Slider from '@material-ui/core/Slider';
-import {setPollSpeed, wsConnect, wsDisconnect, addMachine, wsSetup} from "../store/actions";
+import {
+  setPollSpeed,
+  wsConnect,
+  wsDisconnect,
+  addMachine,
+  wsSetup
+} from "../store/actions";
 import { connect } from "react-redux";
 import { URL } from "../config";
 import PropTypes from "prop-types";
