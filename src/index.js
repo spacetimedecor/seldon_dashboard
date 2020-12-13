@@ -8,7 +8,9 @@ import App from "./components/App";
 // Providers
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
 // Middleware
 import logger from "redux-logger";
@@ -24,6 +26,7 @@ import "./styles/index.css";
 import "fontsource-roboto";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { defaultTheme } from "./styles/theme";
+import Layout from "./components/Layout";
 
 // Instances
 const middleware = [logger, socket];
@@ -42,11 +45,11 @@ const store = createStore(
 render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>
-      </BrowserRouter>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

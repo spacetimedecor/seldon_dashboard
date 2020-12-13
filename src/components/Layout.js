@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 
@@ -16,9 +15,11 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import DesktopMacOutlinedIcon from '@material-ui/icons/DesktopMacOutlined';
 import PropTypes from "prop-types";
 import {drawerStyles} from "../styles/theme";
-import {addMachine, setPollSpeed, wsConnect, wsDisconnect, wsSetup} from "../store/actions";
 import {connect} from "react-redux";
-import {DesktopMacOutlined} from "@material-ui/icons";
+import { Link, Route } from "react-router-dom";
+
+import Home from '../pages/Home';
+import Machine from '../pages/Machine';
 
 
 const Sidebar = (props) => {
@@ -45,23 +46,23 @@ const Sidebar = (props) => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Home', 'Settings'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index === 0 ? <HomeIcon /> : <SettingsIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button key={"Home"} component={Link} to='/'>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Home"} />
+            </ListItem>
+            <ListItem button key={"Settings"} component={Link} to='/settings'>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Settings"} />
+            </ListItem>
           </List>
           <Divider />
           <List>
-            {/*{['All mail', 'Trash', 'Spam'].map((text, index) => (*/}
-            {/*  <ListItem button key={text}>*/}
-            {/*    <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>*/}
-            {/*    <ListItemText primary={text} />*/}
-            {/*  </ListItem>*/}
-            {/*))}*/}
             {props.machines && props.machines.map((machine) => {
-              return <ListItem button key={machine.ID}>
+              return <ListItem button key={machine.ID} component={Link} to={`/machine/${machine.ID}`}>
                 <ListItemIcon>
                   <DesktopMacOutlinedIcon />
                 </ListItemIcon>
@@ -89,7 +90,7 @@ Sidebar.propTypes = {
   machines: PropTypes.array
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   machines: state.MachineValues ? state.MachineValues.map(MachineValue => {
     return {
       Name: MachineValue.Name,

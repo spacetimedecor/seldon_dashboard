@@ -10,73 +10,39 @@ import {
   addMachine,
   wsSetup
 } from "../store/actions";
-import { connect } from "react-redux";
+import {connect, Provider} from "react-redux";
 import { URL } from "../config";
 import PropTypes from "prop-types";
 import Layout from "./Layout";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import Home from "../pages/Home";
+import Machine from "../pages/Machine";
+import Settings from "../pages/Settings";
+
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
+
+import Routing from '../routing.js';
+
+
 
 function App(props) {
 
   useEffect(() => {
     props.wsDisconnect(URL);
     props.wsSetup(URL);
-    props.wsConnect(URL);
+    // props.wsConnect(URL);
     return () => {
       props.wsDisconnect(URL);
     };
   }, []);
 
-  function valuetext(value) {
-    return `${value}ms`;
-  }
-
   return (
     <div className="App">
-      <Layout>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            props.wsDisconnect(URL);
-          }}
-        >
-          Disconnect
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            props.wsConnect(URL);
-          }}
-        >
-          Connect
-        </Button>
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            props.addMachine();
-          }}
-        >
-          Add machine
-        </Button>
-
-        <Slider
-          defaultValue={500}
-          getAriaValueText={valuetext}
-          aria-labelledby="discrete-slider"
-          valueLabelDisplay="auto"
-          step={50}
-          onChange={(e, v) => {
-            props.setPollSpeed(v)
-          }}
-          marks
-          min={50}
-          max={1000}
-        />
-      </Layout>
+      <Router>
+        <Routing />
+      </Router>
     </div>
   );
 }
@@ -84,16 +50,12 @@ function App(props) {
 App.propTypes = {
   wsConnect: PropTypes.func.isRequired,
   wsDisconnect: PropTypes.func.isRequired,
-  addMachine: PropTypes.func.isRequired,
-  setPollSpeed: PropTypes.func.isRequired,
   wsSetup: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
   wsConnect,
   wsDisconnect,
-  addMachine,
-  setPollSpeed,
   wsSetup
 };
 
