@@ -25,7 +25,8 @@ export const drawerStyles = makeStyles((theme) => ({
     height: '100%'
   },
   iconRoot: {
-    textAlign: 'left'
+    textAlign: 'center',
+    width: '100%'
   },
   root: {
     display: 'flex'
