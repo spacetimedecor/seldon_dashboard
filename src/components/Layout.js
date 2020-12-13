@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,6 +6,7 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Icon from '@material-ui/core/Icon';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -15,9 +15,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PropTypes from "prop-types";
 import {drawerStyles} from "../styles/theme";
-
-
-
+import { makeStyles } from '@material-ui/styles';
 
 const MiniDrawer = (props) => {
 
@@ -28,9 +26,9 @@ const MiniDrawer = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
-            Seldon Dashboard
-          </Typography>
+          <Icon classes={{root: classes.iconRoot}}>
+            <img className={classes.imageIcon} src="https://www.seldon.io/wp-content/themes/seldon/includes/images/seldon-logo-mono.svg" alt="logo"/>
+          </Icon>
         </Toolbar>
       </AppBar>
       <Drawer

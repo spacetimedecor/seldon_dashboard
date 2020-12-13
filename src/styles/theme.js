@@ -1,13 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { green, purple, blue } from "@material-ui/core/colors";
+import {blue, green, white, indigo, grey} from "@material-ui/core/colors";
 
 export const defaultTheme = {
   palette: {
+    background: {
+      default: grey[700]
+    },
+    text: {
+      primary: grey[700]
+    },
     primary: {
-      main: blue[500],
+      main: indigo['A700'],
     },
     secondary: {
-      main: green[500],
+      main: blue[500],
     },
   },
 };
@@ -15,24 +21,31 @@ export const defaultTheme = {
 const drawerWidth = 200;
 
 export const drawerStyles = makeStyles((theme) => ({
+  imageIcon: {
+    height: '100%'
+  },
+  iconRoot: {
+    textAlign: 'left'
+  },
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
+    // backgroundColor: grey[300]
   },
   drawerContainer: {
     overflow: 'auto',
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(3)
   },
 }));
