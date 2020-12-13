@@ -39,7 +39,6 @@ const store = createStore(
   )
 );
 
-
 render(
   <React.StrictMode>
     <Provider store={store}>
