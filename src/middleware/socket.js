@@ -1,5 +1,6 @@
 import * as actions from "../store/actions";
 import {
+  ADD_MACHINE,
   RECEIVE_MACHINE_UPDATES, SET_POLL_SPEED, TO_SERVER,
   WS_CONNECT,
   WS_DISCONNECT, WS_DISCONNECTED
@@ -51,6 +52,9 @@ const socketMiddleware = () => {
         break;
       case SET_POLL_SPEED:
         socket?.emit(SET_POLL_SPEED, action.payload);
+        break;
+      case ADD_MACHINE:
+        socket?.emit(ADD_MACHINE, action.payload);
         break;
       case TO_SERVER:
         socket?.emit(TO_SERVER, action.payload);

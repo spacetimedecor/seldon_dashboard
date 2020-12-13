@@ -25,6 +25,11 @@ io.on("connection", (socket) => {
     console.log("SET_POLL_SPEED", e);
     machineManager.setPollSpeed(e)
   });
+
+  socket.on("ADD_MACHINE", (e) => {
+    console.log("ADD_MACHINE", e);
+    machineManager.addMachine(e)
+  });
 });
 
 

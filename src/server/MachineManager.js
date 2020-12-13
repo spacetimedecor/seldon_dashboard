@@ -1,8 +1,8 @@
-const Machine = require('./machine/index')
-const machineOptions = require('./machine/machineOptions.js')
+const Machine = require('./machine/index');
+
 
 module.exports.connect = (client) => {
-  Machine.setupMachines(machineOptions);
+  Machine.setupMachines();
   Machine.startMachines();
   Machine.setOnTick((MachineValues) => {
     client.emit("message", {
@@ -18,4 +18,8 @@ module.exports.disconnect = () => {
 
 module.exports.setPollSpeed = (to) => {
   Machine.setPollSpeed(to);
+}
+
+module.exports.addMachine = (machineSetting) => {
+  Machine.addMachine(machineSetting);
 }
