@@ -42,17 +42,17 @@ function App(props) {
       </Button>
 
       <Slider
-        defaultValue={1000}
+        defaultValue={500}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
-        step={100}
+        step={50}
         onChange={(e, v) => {
           props.setPollSpeed(v)
         }}
         marks
-        min={100}
-        max={2000}
+        min={50}
+        max={1000}
       />
     </div>
   );

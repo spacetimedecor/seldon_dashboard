@@ -5,7 +5,7 @@ module.exports = class Machine {
   // Members
   static timer = null;
   static onTick = null;
-  static pollTime = 1000;
+  static pollTime = 500;
 
   // Machines Controllers
   static setupMachines(machinesOptions){
