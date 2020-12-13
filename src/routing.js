@@ -8,14 +8,23 @@ import Layout from "./components/Layout";
 export const HomeRoute = "/";
 export const SettingsRoute = "/settings/";
 export const MachineRoute = "/machine/:id";
+import { AnimatedSwitch } from 'react-router-transition';
+import './styles/routing.css'
 
 class Routing extends React.Component {
   render() {
     return (
       <Layout>
-        <Route path={HomeRoute} exact component={Home} />
-        <Route path={SettingsRoute} component={Settings} />
-        <Route path={MachineRoute} component={Machine} />
+        <AnimatedSwitch
+          atEnter={{ opacity: 0 }}
+          atLeave={{ opacity: 0 }}
+          atActive={{ opacity: 1 }}
+          className="switch-wrapper"
+        >
+          <Route path={HomeRoute} exact component={Home} />
+          <Route path={SettingsRoute} exact component={Settings} />
+          <Route path={MachineRoute} component={Machine} />
+        </AnimatedSwitch>
       </Layout >
     );
   }
