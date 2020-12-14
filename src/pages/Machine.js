@@ -5,8 +5,8 @@ export default function Machine() {
   let { id } = useParams();
 
   return (
-    <div>
+    <React.Fragment>
       <h3>ID: {id}</h3>
-    </div>
+    </React.Fragment>
   );
 }

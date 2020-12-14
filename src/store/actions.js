@@ -5,10 +5,17 @@ export const wsConnect = host => ({ type: actionTypes.WS_CONNECT, host });
 export const wsSetup = host => ({ type: actionTypes.WS_SETUP, host });
 export const wsDisconnect = host => ({ type: actionTypes.WS_DISCONNECT, host });
 
+export const switchConnection = () => ({ type: actionTypes.SWITCH_CONNECTION });
+
 // To client
 export const updateMachineValues = (MachineValues) => ({
   type: actionTypes.UPDATE_MACHINE_VALUES,
   MachineValues,
+});
+
+export const setLocalPollSpeed = (payload) => ({
+  type: actionTypes.SET_LOCAL_POLL_SPEED,
+  payload
 });
 
 // To server

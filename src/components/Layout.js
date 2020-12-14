@@ -16,6 +16,7 @@ import PropTypes from "prop-types";
 import {drawerStyles} from "../styles/theme";
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
+import Container from "@material-ui/core/Container";
 
 const Sidebar = (props) => {
 
@@ -69,7 +70,9 @@ const Sidebar = (props) => {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        {props.children}
+        <Container maxWidth="sm">
+          {props.children}
+        </Container>
       </main>
     </div>
   );

@@ -1,11 +1,11 @@
 import * as actions from "../store/actions";
 import {
   ADD_MACHINE,
-  RECEIVE_MACHINE_UPDATES, SET_POLL_SPEED, TO_SERVER,
+  RECEIVE_MACHINE_UPDATES, SET_LOCAL_POLL_SPEED, SET_POLL_SPEED, TO_SERVER,
   WS_CONNECT,
   WS_DISCONNECT, WS_DISCONNECTED, WS_SETUP
 } from "../store/actionTypes";
-import {updateMachineValues} from "../store/actions";
+import {setLocalPollSpeed, updateMachineValues} from "../store/actions";
 import {io} from "socket.io-client";
 import {URL} from "../config";
 
@@ -52,6 +52,7 @@ const socketMiddleware = () => {
         break;
       case SET_POLL_SPEED:
         socket?.emit(SET_POLL_SPEED, action.payload);
+        store.dispatch(setLocalPollSpeed(action.payload));
         break;
       case ADD_MACHINE:
         socket?.emit(ADD_MACHINE, action.payload);

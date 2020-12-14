@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div>
+    <React.Fragment>
       <h3>Home</h3>
-    </div>
+    </React.Fragment>
   );
 }

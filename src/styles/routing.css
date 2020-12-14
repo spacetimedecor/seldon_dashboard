@@ -1,3 +1,7 @@
-#root {
-    height: 100vh;
+.switch-wrapper {
+    position: relative;
+}
+
+.switch-wrapper > div {
+    position: absolute;
 }

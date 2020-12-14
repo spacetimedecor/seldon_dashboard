@@ -4,7 +4,7 @@ import {blue, green, white, indigo, grey} from "@material-ui/core/colors";
 export const defaultTheme = {
   palette: {
     background: {
-      default: grey[700]
+      default: grey[300]
     },
     text: {
       primary: grey[700]
@@ -22,11 +22,13 @@ const drawerWidth = 200;
 
 export const drawerStyles = makeStyles((theme) => ({
   imageIcon: {
-    height: '100%'
+    height: '100%',
+    width: 'auto'
   },
   iconRoot: {
-    textAlign: 'center',
-    width: '100%'
+    textAlign: 'left',
+    // width: '100%',
+    // overflow: 'show'
   },
   root: {
     display: 'flex'
