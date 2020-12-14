@@ -2,6 +2,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import {blue, green, white, indigo, grey} from "@material-ui/core/colors";
 
 export const defaultTheme = {
+  transitions: {
+    duration: {
+      shortest: 150,
+      shorter: 200,
+      short: 250,
+      // most basic recommended timing
+      standard: 300,
+      // this is to be used in complex animations
+      complex: 375,
+      // recommended when something is entering screen
+      enteringScreen: 225,
+      // recommended when something is leaving screen
+      leavingScreen: 195,
+    },
+  },
   palette: {
     background: {
       default: grey[300]

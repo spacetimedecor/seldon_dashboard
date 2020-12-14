@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import {URL} from "../config";
 import Slider from "@material-ui/core/Slider";
@@ -27,6 +27,7 @@ const Settings = (props) => {
               if (props.connection) {
                 props.wsDisconnect(URL);
                 props.switchConnection();
+                props.updateMachineValues([]);
               } else {
                 props.wsConnect(URL);
                 props.switchConnection();
@@ -70,6 +71,7 @@ Settings.propTypes = {
   setPollSpeed: PropTypes.func.isRequired,
   wsSetup: PropTypes.func.isRequired,
   switchConnection: PropTypes.func.isRequired,
+  updateMachineValues: PropTypes.func.isRequired,
   connection: PropTypes.bool.isRequired,
   localPollSpeed: PropTypes.number.isRequired
 };
@@ -81,6 +83,7 @@ const mapDispatchToProps = {
   setPollSpeed,
   wsSetup,
   switchConnection,
+  updateMachineValues
 };
 
 const mapStateToProps = (state) => ({

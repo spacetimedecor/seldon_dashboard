@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory();
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 // Middleware
 import logger from "redux-logger";
@@ -47,7 +48,9 @@ render(
     <Provider store={store}>
       <Router history={history}>
         <ThemeProvider theme={theme}>
-          <App />
+          <StyledThemeProvider theme={theme}>
+            <App />
+          </StyledThemeProvider>
         </ThemeProvider>
       </Router>
     </Provider>
