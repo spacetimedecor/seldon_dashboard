@@ -1,3 +1,7 @@
+//////////////////////////////
+// Imports
+//////////////////////////////
+
 // React
 import React from "react";
 import { render } from "react-dom";
@@ -9,9 +13,9 @@ import App from "./components/App";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { Provider } from "react-redux";
 import { Router } from "react-router-dom";
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 // Middleware
 import logger from "redux-logger";
@@ -29,7 +33,9 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { defaultTheme } from "./styles/theme";
 import Layout from "./components/Layout";
 
+//////////////////////////////
 // Instances
+//////////////////////////////
 const middleware = [logger, socket];
 const theme = createMuiTheme(defaultTheme);
 const store = createStore(
@@ -38,22 +44,22 @@ const store = createStore(
   // applyMiddleware(logger)
   compose(
     applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
+//////////////////////////////
+// Renderer
+//////////////////////////////
 render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router history={history}>
-        <ThemeProvider theme={theme}>
-          <StyledThemeProvider theme={theme}>
-            <App />
-          </StyledThemeProvider>
-        </ThemeProvider>
-      </Router>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <Router history={history}>
+      <ThemeProvider theme={theme}>
+        <StyledThemeProvider theme={theme}>
+          <App />
+        </StyledThemeProvider>
+      </ThemeProvider>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );

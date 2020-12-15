@@ -1,6 +1,12 @@
+//////////////////////////////
+// Imports
+//////////////////////////////
 import { makeStyles } from '@material-ui/core/styles';
 import {blue, green, white, indigo, grey} from "@material-ui/core/colors";
 
+//////////////////////////////
+// Defaults
+//////////////////////////////
 export const defaultTheme = {
   transitions: {
     duration: {
@@ -33,6 +39,9 @@ export const defaultTheme = {
   },
 };
 
+//////////////////////////////
+// Drawer
+//////////////////////////////
 const drawerWidth = 200;
 
 export const drawerStyles = makeStyles((theme) => ({

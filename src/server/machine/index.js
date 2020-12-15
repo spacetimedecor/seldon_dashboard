@@ -1,6 +1,6 @@
 const { v4: uuid } = require('uuid');
 const Program = require("./program");
-const defaultSettings = require('./defaultSettings.js')
+const defaultSettings = require('./defaultSettings.js');
 
 module.exports = class Machine {
 
@@ -33,13 +33,13 @@ module.exports = class Machine {
     return {
       ID: uuid(),
       Name: machineSetting.Name,
-      StartTime: new Date().getTime(),
+      StartTime: new Date().toUTCString(),
       Programs: machineSetting.Programs
         .map(program => {
             return {
               ID: uuid(),
               Name: program.Name,
-              StartTime: new Date().getTime(),
+              StartTime: new Date().toUTCString() // December 14th 2020, 10:58:43 pm,
             }
           }
         )
@@ -103,11 +103,25 @@ module.exports = class Machine {
   }
 
   getValues = () => {
+
+    const programValues = this.programs.map(program => program.getValues());
+    const averageCPU = programValues
+      .map(programValue => programValue.CPU)
+      .reduce((a, b) => (a + b))
+      / programValues.length;
+    const averageMemory = programValues
+      .map(programValue => programValue.Memory)
+      .reduce((a, b) => (a + b))
+      / programValues.length;
+
+
     return {
-      ProgramValues: this.programs.map(program => program.getValues()),
+      ProgramValues: programValues,
       Name: this.machineSetting.Name,
       StartTime: this.machineSetting.StartTime,
       ID: this.machineSetting.ID,
+      CPU: averageCPU,
+      Memory: averageMemory
     }
   }
 }

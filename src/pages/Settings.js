@@ -1,3 +1,6 @@
+//////////////////////////////
+// Imports
+//////////////////////////////
 import React from "react";
 import Button from "@material-ui/core/Button";
 import {URL} from "../config";
@@ -14,15 +17,21 @@ import {
 } from "../store/actions";
 import {connect} from "react-redux";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import CheckIcon from '@material-ui/icons/Check';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 import Switch from "@material-ui/core/Switch";
-
+//////////////////////////////
+// Component
+//////////////////////////////
 const Settings = (props) => {
   return (
     <React.Fragment>
       <FormControlLabel
+        labelPlacement="top"
         control={
-          <Switch
-            checked={props.connection}
+          <ToggleButton
+            value="check"
+            selected={props.connection}
             onChange={() => {
               if (props.connection) {
                 props.wsDisconnect(URL);
@@ -33,7 +42,9 @@ const Settings = (props) => {
                 props.switchConnection();
               }
             }}
-          />
+          >
+            <CheckIcon />
+          </ToggleButton>
         }
         label="Connection"
       />
@@ -63,7 +74,9 @@ const Settings = (props) => {
     </React.Fragment>
   );
 }
-
+//////////////////////////////
+// Connections
+//////////////////////////////
 Settings.propTypes = {
   wsConnect: PropTypes.func.isRequired,
   wsDisconnect: PropTypes.func.isRequired,

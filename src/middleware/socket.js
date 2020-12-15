@@ -1,3 +1,6 @@
+//////////////////////////////
+// Imports
+//////////////////////////////
 import * as actions from "../store/actions";
 import {
   ADD_MACHINE,
@@ -9,12 +12,24 @@ import {setLocalPollSpeed, updateMachineValues} from "../store/actions";
 import {io} from "socket.io-client";
 import {URL} from "../config";
 
+//////////////////////////////
+// Action interceptors
+//////////////////////////////
 const socketMiddleware = () => {
 
+  // Members
   let socket = null;
 
+  // Callbacks
+  const disconnect = () => {
+    socket?.removeAllListeners();
+    socket?.disconnect();
+    socket?.close();
+    socket?.destroy();
+    socket = null;
+  }
+
   const onMessage = (store) => (event) => {
-    //console.log("message from server: ", event)
     switch (event.type) {
       case RECEIVE_MACHINE_UPDATES:
         store.dispatch(updateMachineValues(event.MachineValues));
@@ -24,14 +39,6 @@ const socketMiddleware = () => {
     }
   }
 
-  const disconnect = () => {
-    socket?.removeAllListeners();
-    socket?.disconnect();
-    socket?.close();
-    socket?.destroy();
-    socket = null;
-  }
-  // the middleware part of this function
   return (store) => (next) => (action) => {
     switch (action.type) {
       case WS_SETUP:
@@ -66,4 +73,7 @@ const socketMiddleware = () => {
   };
 };
 
+//////////////////////////////
+// Connections
+//////////////////////////////
 export default socketMiddleware();

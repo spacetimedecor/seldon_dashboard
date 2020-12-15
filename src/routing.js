@@ -15,16 +15,9 @@ class Routing extends React.Component {
   render() {
     return (
       <Layout>
-        <AnimatedSwitch
-          atEnter={{ opacity: 0 }}
-          atLeave={{ opacity: 0 }}
-          atActive={{ opacity: 1 }}
-          className="switch-wrapper"
-        >
-          <Route path={HomeRoute} exact component={Home} />
-          <Route path={SettingsRoute} exact component={Settings} />
-          <Route path={MachineRoute} component={Machine} />
-        </AnimatedSwitch>
+        <Route path={HomeRoute} exact component={Home} />
+        <Route path={SettingsRoute} exact component={Settings} />
+        <Route path={MachineRoute} component={Machine} />
       </Layout >
     );
   }

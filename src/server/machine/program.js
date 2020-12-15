@@ -1,4 +1,5 @@
 const {Noise} = require('noisejs');
+const { v4: uuid } = require('uuid');
 
 module.exports = class Program {
 
@@ -13,7 +14,8 @@ module.exports = class Program {
       CPU: this.getCPU.next().value,
       Memory: this.getMemory.next().value,
       Name: this.options.Name,
-      StartTime: this.options.StartTime
+      StartTime: this.options.StartTime,
+      ID: this.options.ID
     }
   }
 

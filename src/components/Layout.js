@@ -1,3 +1,6 @@
+//////////////////////////////
+// Imports
+//////////////////////////////
 import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
@@ -17,18 +20,9 @@ import { drawerStyles } from "../styles/theme";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-import styled from "styled-components";
-import Fade from "@material-ui/core/Fade";
-
-// const AnimatedListItem = styled(ListItem)`
-//   ${({ theme }) => `
-//     cursor: pointer;
-//     transition: ${theme.transitions.create(['opacity'], {
-//       duration: theme.transitions.duration.standard,
-//     })};`
-//   }
-// `;
-
+//////////////////////////////
+// Component
+//////////////////////////////
 const Sidebar = (props) => {
   const classes = drawerStyles();
 
@@ -92,12 +86,16 @@ const Sidebar = (props) => {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <Container maxWidth="sm">{props.children}</Container>
+        <Container>
+          {props.children}
+        </Container>
       </main>
     </div>
   );
 };
-
+//////////////////////////////
+// Connections
+//////////////////////////////
 Sidebar.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
