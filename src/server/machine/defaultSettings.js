@@ -4,14 +4,28 @@ const defaultSettings = [
     Programs: [
       {
         Name: "Program 1",
+      },
+      {
+        Name: "Another Program",
       }
     ]
   },
   {
-    Name: "Machine 2",
+    Name: "Adam's Machine",
     Programs: [
       {
         Name: "Program 1",
+      }
+    ]
+  },
+  {
+    Name: "A Robot",
+    Programs: [
+      {
+        Name: "Program 1",
+      },
+      {
+        Name: "Program 2",
       }
     ]
   }

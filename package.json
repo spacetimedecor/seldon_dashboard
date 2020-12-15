@@ -19,6 +19,8 @@
     "noisejs": "^2.1.0",
     "prop-types": "^15.7.2",
     "react": "latest",
+    "react-apexcharts": "^1.3.7",
+    "react-d3-library": "^1.1.8",
     "react-dom": "latest",
     "react-icons": "latest",
     "react-redux": "^7.2.2",

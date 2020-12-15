@@ -22,7 +22,7 @@ function App(props) {
     window.addEventListener("unload", disconnectFunc);
     props.wsDisconnect(URL);
     props.wsSetup(URL);
-    // props.wsConnect(URL);
+    props.wsConnect(URL);
     return () => {
       props.wsDisconnect(URL);
     };
