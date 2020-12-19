@@ -9,6 +9,7 @@ import { URL } from "../config";
 import PropTypes from "prop-types";
 import { useRouteMatch } from "react-router-dom";
 import Layout from "./Layout";
+import BaseGrid from "./BaseGrid";
 
 export const ParamsContext = React.createContext({
   machine: null,
@@ -52,7 +53,9 @@ function App(props) {
         }}
       >
         <Layout>
-          {"test"}
+          <BaseGrid>
+            test
+          </BaseGrid>
         </Layout>
       </ParamsContext.Provider>
     </div>

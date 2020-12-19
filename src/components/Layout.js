@@ -78,7 +78,7 @@ const Sidebar = (props) => {
                     key={machine.ID}
                     button
                     component={Link}
-                    to={`/machine/${machine.ID}`}
+                    to={`/${machine.ID}`}
                   >
                     <ListItemIcon>
                       <DesktopMacOutlinedIcon />
