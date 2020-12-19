@@ -13,7 +13,8 @@ import {
 } from "../store/actions";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {gridItemStyles} from "../styles/theme";
+import { gridItemStyles } from "../styles/theme";
+import GridItem from "./GridItem";
 
 class BaseGrid extends React.PureComponent {
   render() {
@@ -37,11 +38,14 @@ class BaseGrid extends React.PureComponent {
           return (
             <Paper
               className={classes.root}
-              elevation={3}
+              elevation={4}
               key={`machine-${machine.id}`}
-              data-grid={{ x: i * 4, y: 0, w: 1, h: 1, static: false }}
             >
-              <span className="draggable">{machine.name}</span>
+              <GridItem
+                type={"machine"}
+                machine={machine}
+                data-grid={{ x: i * 4, y: 0, w: 1, h: 1, static: false }}
+              />
             </Paper>
           );
         })}

@@ -13,8 +13,6 @@ import App from "./components/App";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { createBrowserHistory } from "history";
-import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 // Middleware
 import logger from "redux-logger";
@@ -32,7 +30,6 @@ import "./styles/index.css";
 import "fontsource-roboto";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { defaultTheme } from "./styles/theme";
-import Layout from "./components/Layout";
 
 //////////////////////////////
 // Instances
@@ -57,9 +54,7 @@ render(
   <Provider store={store}>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        {/*<StyledThemeProvider theme={theme}>*/}
-          <App />
-        {/*</StyledThemeProvider>*/}
+        <App />
       </ThemeProvider>
     </BrowserRouter>
   </Provider>,

@@ -1,8 +1,8 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import { makeStyles } from '@material-ui/core/styles';
-import {blue, green, indigo, grey} from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
+import { blue, green, indigo, grey } from "@material-ui/core/colors";
 
 //////////////////////////////
 // Defaults
@@ -25,16 +25,16 @@ export const defaultTheme = {
   },
   palette: {
     background: {
-      default: grey[300]
+      default: grey[300],
     },
     text: {
-      primary: grey[700]
+      primary: grey[700],
     },
     primary: {
-      main: indigo['A700'],
+      main: indigo["A700"],
     },
     secondary: {
-      main: grey[500],
+      main: grey[700],
     },
   },
 };
@@ -43,14 +43,42 @@ export const defaultTheme = {
 // Grid item
 //////////////////////////////
 
-export const gridItemStyles =  (theme) => ({
+export const gridItemStyles = (theme) => ({
   root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    border: 1,
     borderRadius: 10,
+    padding: 10,
     // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
   },
 });
+
+export const gridItemContentsStyles = makeStyles((theme) => ({
+  root: {
+    // borderRadius: 10,
+    // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    padding: "0!important",
+  },
+  paper: {},
+  grid: {
+    // padding: "1rem",
+    display: "flex",
+    flexDirection: 'row'
+  },
+  top: {
+    width:'80%!important'
+  },
+  optionsColumn: {
+    display: "flex",
+    flexDirection: 'column',
+    width: 'min-content!important'
+  },
+  label: {
+    // alignItems: "center",
+    // verticalAlign: "middle",
+    // textAlign: "center"
+    display: "flex",
+    direction: "row",
+  },
+}));
 
 //////////////////////////////
 // Drawer
@@ -59,53 +87,53 @@ const drawerWidth = 180;
 
 export const layoutStyles = makeStyles((theme) => ({
   imageIcon: {
-    height: '100%',
-    width: 'auto'
+    height: "100%",
+    width: "auto",
   },
   iconRoot: {
-    textAlign: 'left',
-    position: 'absolute',
-    top: 'calc(50% - 0.85rem)',
-    left: '1.15rem'
+    textAlign: "left",
+    position: "absolute",
+    top: "calc(50% - 0.85rem)",
+    left: "1.15rem",
     // width: '100%',
     // overflow: 'show'
   },
   breadcrumbs: {
-    justifyContent: 'center!important',
-    color: 'white'
+    justifyContent: "center!important",
+    color: "white",
   },
   listItemText: {
-    color: grey[600]
+    color: grey[700],
   },
   root: {
-    display: 'flex'
+    display: "flex",
   },
   toolbar: {
-    justifyContent: 'center',
-    width: '100%',
-    display: 'flex'
+    justifyContent: "center",
+    width: "100%",
+    display: "flex",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
     // backgroundColor: grey[300]
   },
   drawerContainer: {
-    overflow: 'auto',
+    overflow: "auto",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    height: '100vh',
+    height: "100vh",
     backgroundImage:
-      'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)'
+      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)",
   },
 }));
