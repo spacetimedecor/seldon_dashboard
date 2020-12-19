@@ -39,11 +39,20 @@ export const defaultTheme = {
   },
 };
 
+export const gridLayoutStyles = makeStyles({
+  root: {
+    height: 'calc(100vh - 64px)',
+    // height: '100%',
+    backgroundImage:
+      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)"
+  }
+})
+
 //////////////////////////////
 // Grid item
 //////////////////////////////
 
-export const gridItemStyles = (theme) => ({
+export const gridItemStyles = makeStyles ({
   root: {
     borderRadius: 10,
     padding: 10,
@@ -56,12 +65,14 @@ export const gridItemContentsStyles = makeStyles((theme) => ({
     // borderRadius: 10,
     // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     padding: "0!important",
+    zIndex: 10,
   },
   paper: {},
   grid: {
     // padding: "1rem",
     display: "flex",
-    flexDirection: 'row'
+    flexDirection: 'row',
+    draggable: 'true'
   },
   top: {
     width:'80%!important'
@@ -131,9 +142,7 @@ export const layoutStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: 0,
     height: "100vh",
-    backgroundImage:
-      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)",
   },
 }));

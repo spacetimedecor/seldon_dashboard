@@ -49,12 +49,12 @@ const Sidebar = (props) => {
             aria-label="breadcrumb"
           >
             {params.machine && (
-              <Link to={`/${params.machine}`} color='inherit'>
+              <Link to={`/${params.machine}`} color="inherit">
                 {params.machine}
               </Link>
             )}
             {params.program && (
-              <Link to={`/${params.machine}/${params.program}`} color='inherit'>
+              <Link to={`/${params.machine}/${params.program}`} color="inherit">
                 {params.program}
               </Link>
             )}
@@ -83,7 +83,10 @@ const Sidebar = (props) => {
                     <ListItemIcon>
                       <DesktopMacOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary={machine.Name} className={classes.listItemText}/>
+                    <ListItemText
+                      primary={machine.Name}
+                      className={classes.listItemText}
+                    />
                   </ListItem>
                 );
               })}
@@ -92,7 +95,7 @@ const Sidebar = (props) => {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <Container>{props.children}</Container>
+        {props.children}
       </main>
     </div>
   );

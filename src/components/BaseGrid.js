@@ -1,3 +1,6 @@
+//////////////////////////////
+// Imports
+//////////////////////////////
 import React from "react";
 import ReactGridLayout from "react-grid-layout";
 import PropTypes from "prop-types";
@@ -13,33 +16,88 @@ import {
 } from "../store/actions";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { gridItemStyles } from "../styles/theme";
+import { gridItemStyles, gridLayoutStyles } from "../styles/theme";
 import GridItem from "./GridItem";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import Container from "@material-ui/core/Container";
+//////////////////////////////
+// Component
+//////////////////////////////
+const BaseGrid = (props) => {
+  const classes = gridItemStyles();
+  const gridLayoutClasses = gridLayoutStyles();
 
-class BaseGrid extends React.PureComponent {
-  render() {
-    const { classes } = this.props;
+  const initialState = {
+    mouseX: null,
+    mouseY: null,
+  };
 
-    return (
+  const [menuLocation, setMenuLocation] = React.useState(initialState);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const handleClick = (event) => {
+    console.log(1);
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuLocation({
+      mouseX: event.clientX - 2,
+      mouseY: event.clientY - 4,
+    });
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleClose = () => {
+    setMenuLocation(initialState);
+  };
+
+  return (
+    <Container
+      style={{ padding: 0, margin: 0 }}
+      maxWidth={false}
+      onClick={handleClick}
+    >
+      <Menu
+        keepMounted
+        open={
+          menuOpen &&
+          menuLocation.mouseY !== null &&
+          menuLocation.mouseX !== null
+        }
+        onClose={handleClose}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          menuLocation.mouseY !== null && menuLocation.mouseX !== null
+            ? { top: menuLocation.mouseY, left: menuLocation.mouseX }
+            : undefined
+        }
+      >
+        <MenuItem onClick={handleClose}>Add Machine</MenuItem>
+      </Menu>
       <ReactGridLayout
-        className="layout"
+        className={gridLayoutClasses.root}
         cols={4}
         rowHeight={1000 / 4}
         width={1200}
-        height={1000}
-        autoSize={true}
+        // height={1000}
+        autoSize={false}
         draggableHandle=".draggable"
         // isResizable={false}
         // isBounded={true}
         // preventCollision
         // onLayoutChange={this.onLayoutChange}
       >
-        {this.props.machines.map((machine, i) => {
+        {props.machines.map((machine, i) => {
           return (
             <Paper
               className={classes.root}
               elevation={4}
               key={`machine-${machine.id}`}
+              // onClick={(e) => {e.preventDefault(); e.stopPropagation();}}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
             >
               <GridItem
                 type={"machine"}
@@ -50,9 +108,9 @@ class BaseGrid extends React.PureComponent {
           );
         })}
       </ReactGridLayout>
-    );
-  }
-}
+    </Container>
+  );
+};
 
 //////////////////////////////
 // Connections
@@ -68,7 +126,6 @@ BaseGrid.propTypes = {
   updateMachineValues: PropTypes.func.isRequired,
   connection: PropTypes.bool.isRequired,
   localPollSpeed: PropTypes.number.isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -106,6 +163,4 @@ const mapStateToProps = (state) => ({
     : [],
 });
 
-export default withStyles(gridItemStyles)(
-  connect(mapStateToProps, mapDispatchToProps)(BaseGrid)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(BaseGrid);

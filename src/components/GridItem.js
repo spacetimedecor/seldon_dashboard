@@ -19,6 +19,7 @@ import Box from "@material-ui/core/Box";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from "@material-ui/core/IconButton";
 import OpenWithIcon from '@material-ui/icons/OpenWith';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import Icon from "@material-ui/core/Icon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -70,13 +71,20 @@ const GridItem = (props) => {
   };
 
   return (
-    <Container className={classes.root}>
+    <Container
+      className={classes.root}
+    >
       <Grid
         container
         className={classes.grid}
         justify="space-between"
       >
-        <Grid container direction="row" alignItems="flex-start" className={classes.top}>
+        <Grid
+          container
+          direction="row"
+          alignItems="flex-start"
+          className={classes.top}
+        >
           <Grid item>
             {type === "machine" ? (
               <DesktopMacOutlinedIcon/>
@@ -92,7 +100,12 @@ const GridItem = (props) => {
             </Box>
           </Grid>
         </Grid>
-        <Grid container direction="column" alignItems="center" className={classes.optionsColumn}>
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          className={classes.optionsColumn}
+        >
           <Grid item>
             <IconButton aria-label="options" size="small" onClick={handleClick}>
               <MoreVertIcon/>
@@ -107,6 +120,11 @@ const GridItem = (props) => {
               <MenuItem onClick={handleClose}>Remove</MenuItem>
               <MenuItem onClick={handleClose}>Duplicate</MenuItem>
             </Menu>
+          </Grid>
+          <Grid item  >
+            <IconButton aria-label="options" size="small">
+              <ZoomInIcon/>
+            </IconButton>
           </Grid>
           <Grid item  >
             <IconButton aria-label="options" size="small" className="draggable">
