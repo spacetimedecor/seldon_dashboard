@@ -5,7 +5,7 @@ export const wsConnect = host => ({ type: actionTypes.WS_CONNECT, host });
 export const wsSetup = host => ({ type: actionTypes.WS_SETUP, host });
 export const wsDisconnect = host => ({ type: actionTypes.WS_DISCONNECT, host });
 
-export const switchConnection = () => ({ type: actionTypes.SWITCH_CONNECTION });
+export const switchConnection = (Connection) => ({ type: actionTypes.SWITCH_CONNECTION, Connection });
 
 // To client
 export const updateMachineValues = (MachineValues) => ({

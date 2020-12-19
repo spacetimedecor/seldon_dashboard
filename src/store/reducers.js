@@ -10,7 +10,7 @@ export default (state = {}, action) => {
     case SWITCH_CONNECTION:
       return {
         ...state,
-        Connection: !state.Connection
+        Connection: action.Connection
       }
     case SET_LOCAL_POLL_SPEED:
       return {

@@ -1,5 +1,5 @@
 export const defaultState = {
   MachineValues: [],
-  Connection: false,
+  Connection: true,
   LocalPollSpeed: 500
 }

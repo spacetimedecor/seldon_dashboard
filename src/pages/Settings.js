@@ -1,7 +1,7 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "@material-ui/core/Button";
 import { URL } from "../config";
 import Slider from "@material-ui/core/Slider";
@@ -26,6 +26,7 @@ import Toggle from "@material-ui/core/Checkbox";
 // Component
 //////////////////////////////
 const Settings = (props) => {
+
   return (
     <React.Fragment>
       <Grid
@@ -40,17 +41,15 @@ const Settings = (props) => {
             labelPlacement="bottom"
             control={
               <Toggle
-                value="check"
-                selected={props.connection}
-                onChange={() => {
+                checked={props.connection}
+                onChange={(e) => {
                   if (props.connection) {
                     props.wsDisconnect(URL);
-                    props.switchConnection();
                     props.updateMachineValues([]);
                   } else {
                     props.wsConnect(URL);
-                    props.switchConnection();
                   }
+                  props.switchConnection(e.target.checked);
                 }}
               >
                 <CheckIcon />
