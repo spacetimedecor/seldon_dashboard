@@ -2,7 +2,7 @@
 // Imports
 //////////////////////////////
 import { makeStyles } from '@material-ui/core/styles';
-import {blue, green, white, indigo, grey} from "@material-ui/core/colors";
+import {blue, green, indigo, grey} from "@material-ui/core/colors";
 
 //////////////////////////////
 // Defaults
@@ -31,10 +31,10 @@ export const defaultTheme = {
       primary: grey[700]
     },
     primary: {
-      main: indigo['A700'],
+      main: indigo['A100'],
     },
     secondary: {
-      main: blue[500],
+      main: grey[500],
     },
   },
 };
@@ -42,23 +42,40 @@ export const defaultTheme = {
 //////////////////////////////
 // Drawer
 //////////////////////////////
-const drawerWidth = 200;
+const drawerWidth = 180;
 
-export const drawerStyles = makeStyles((theme) => ({
+export const layoutStyles = makeStyles((theme) => ({
   imageIcon: {
     height: '100%',
     width: 'auto'
   },
   iconRoot: {
     textAlign: 'left',
+    position: 'absolute',
+    top: 'calc(50% - 0.85rem)',
+    left: '1.15rem'
     // width: '100%',
     // overflow: 'show'
+  },
+  breadcrumbs: {
+    justifyContent: 'center!important',
+    color: 'white'
+  },
+  listItemText: {
+    color: grey[600]
   },
   root: {
     display: 'flex'
   },
+  toolbar: {
+    justifyContent: 'center',
+    width: '100%',
+    display: 'flex'
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    justifyContent: 'center',
+    color: grey[700],
   },
   drawer: {
     width: drawerWidth,
@@ -73,6 +90,9 @@ export const drawerStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    height: '100vh',
+    backgroundImage:
+      'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)'
   },
 }));

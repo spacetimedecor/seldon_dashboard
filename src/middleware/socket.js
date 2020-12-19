@@ -21,14 +21,6 @@ const socketMiddleware = () => {
   let socket = null;
 
   // Callbacks
-  const disconnect = () => {
-    socket?.removeAllListeners();
-    socket?.disconnect();
-    socket?.close();
-    socket?.destroy();
-    socket = null;
-  }
-
   const onMessage = (store) => (event) => {
     switch (event.type) {
       case RECEIVE_MACHINE_UPDATES:

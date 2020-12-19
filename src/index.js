@@ -12,9 +12,8 @@ import App from "./components/App";
 // Providers
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
-const history = createBrowserHistory();
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 // Middleware
@@ -36,7 +35,8 @@ import Layout from "./components/Layout";
 //////////////////////////////
 // Instances
 //////////////////////////////
-const middleware = [logger, socket];
+const middleware = [socket];
+// const middleware = [logger, socket];
 const theme = createMuiTheme(defaultTheme);
 const store = createStore(
   reducers,
@@ -53,13 +53,13 @@ const store = createStore(
 //////////////////////////////
 render(
   <Provider store={store}>
-    <Router history={history}>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <StyledThemeProvider theme={theme}>
+        {/*<StyledThemeProvider theme={theme}>*/}
           <App />
-        </StyledThemeProvider>
+        {/*</StyledThemeProvider>*/}
       </ThemeProvider>
-    </Router>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

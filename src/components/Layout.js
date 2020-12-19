@@ -1,7 +1,7 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import React from "react";
+import React, { useContext } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,28 +16,49 @@ import HomeIcon from "@material-ui/icons/Home";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DesktopMacOutlinedIcon from "@material-ui/icons/DesktopMacOutlined";
 import PropTypes from "prop-types";
-import { drawerStyles } from "../styles/theme";
+import { layoutStyles } from "../styles/theme";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
+import { ParamsContext } from "./App";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Typography from "@material-ui/core/Typography";
 //////////////////////////////
 // Component
 //////////////////////////////
 const Sidebar = (props) => {
-  const classes = drawerStyles();
+  const params = useContext(ParamsContext);
+  const classes = layoutStyles();
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Icon classes={{ root: classes.iconRoot }}>
-            <img
-              className={classes.imageIcon}
-              src="https://www.seldon.io/wp-content/themes/seldon/includes/images/seldon-logo-mono.svg"
-              alt="logo"
-            />
-          </Icon>
+        <Toolbar classes={{ root: classes.toolbar }}>
+          <Link to={"/"}>
+            <Icon classes={{ root: classes.iconRoot }}>
+              <img
+                className={classes.imageIcon}
+                src="https://www.seldon.io/wp-content/themes/seldon/includes/images/seldon-logo-mono.svg"
+                alt="logo"
+              />
+            </Icon>
+          </Link>
+          <Breadcrumbs
+            classes={{ root: classes.breadcrumbs }}
+            aria-label="breadcrumb"
+          >
+            {params.machine && (
+              <Link to={`/${params.machine}`} color='inherit'>
+                {params.machine}
+              </Link>
+            )}
+            {params.program && (
+              <Link to={`/${params.machine}/${params.program}`} color='inherit'>
+                {params.program}
+              </Link>
+            )}
+          </Breadcrumbs>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -49,21 +70,6 @@ const Sidebar = (props) => {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <List>
-            <ListItem button key={"Home"} component={Link} to="/">
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Home"} />
-            </ListItem>
-            <ListItem button key={"Settings"} component={Link} to="/settings">
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Settings"} />
-            </ListItem>
-          </List>
-          <Divider />
           <List>
             {props.machines &&
               props.machines.map((machine, i) => {
@@ -77,7 +83,7 @@ const Sidebar = (props) => {
                     <ListItemIcon>
                       <DesktopMacOutlinedIcon />
                     </ListItemIcon>
-                    <ListItemText primary={machine.Name} />
+                    <ListItemText primary={machine.Name} className={classes.listItemText}/>
                   </ListItem>
                 );
               })}
@@ -86,9 +92,7 @@ const Sidebar = (props) => {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <Container>
-          {props.children}
-        </Container>
+        <Container>{props.children}</Container>
       </main>
     </div>
   );

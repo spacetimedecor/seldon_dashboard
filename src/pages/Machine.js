@@ -1,7 +1,5 @@
 import { useParams } from "react-router";
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import { DataGrid } from "@material-ui/data-grid";
 import PropTypes from "prop-types";
 import {
   addMachine,
@@ -13,48 +11,13 @@ import {
   wsSetup,
 } from "../store/actions";
 import { connect } from "react-redux";
-import Paper from "@material-ui/core/Paper";
-
-const columns = [
-  { field: "name", headerName: "Name", width: 150 },
-  { field: "id", headerName: "ID", width: 100 },
-  { field: "startTime", headerName: "Start Time", width: 250 },
-  { field: "cpu", headerName: "CPU", width: 100 },
-  { field: "memory", headerName: "Memory", width: 100 },
-];
 
 const Machine = (props) => {
   let { id } = useParams();
 
   return (
     <React.Fragment>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Grid container>
-          <Grid item xs={6}>
-            <Paper elevation={1}>CPU</Paper>
-          </Grid>
-          <Grid item xs={6}>
-            <Paper elevation={1}>Memory</Paper>
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12}>
-            <DataGrid
-              rows={
-                props.machines && props.machines.length > 0
-                  ? props.machines.filter((m) => m.id === id)[0].programValues
-                  : []
-              }
-              columns={columns}
-              pageSize={5}
-              checkboxSelection
-              autoHeight
-              rowCount={10}
-              autoPageSize
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+
     </React.Fragment>
   );
 };
