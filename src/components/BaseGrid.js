@@ -143,7 +143,6 @@ const BaseGrid = (props) => {
         cols={4}
         rowHeight={1000 / 4}
         width={1200}
-        // height={1000}
         autoSize={false}
         draggableHandle=".draggable"
         bound={false}
@@ -152,7 +151,6 @@ const BaseGrid = (props) => {
         })}
       >
         {props.machines.map((machine, i) => {
-          console.log(machine, i, props.sortBy);
           return (
             <Paper
               className={clsx(classes.root, {
