@@ -1,10 +1,9 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Paper from "@material-ui/core/Paper";
 import {
   gridItemContentsStyles,
   gridItemStyles,
@@ -12,7 +11,6 @@ import {
 } from "../styles/theme";
 import Grid from "@material-ui/core/Grid";
 import DesktopMacOutlinedIcon from "@material-ui/icons/DesktopMacOutlined";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -21,13 +19,11 @@ import IconButton from "@material-ui/core/IconButton";
 import OpenWithIcon from "@material-ui/icons/OpenWith";
 import ZoomInIcon from "@material-ui/icons/ZoomIn";
 import ZoomOutIcon from "@material-ui/icons/ZoomOut";
-import Icon from "@material-ui/core/Icon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { addMachine, removeMachine } from "../store/actions";
-import clsx from "clsx";
-import {useHistory} from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
+import RTChart from "react-rt-chart";
 
 //////////////////////////////
 // Parts
@@ -63,16 +59,12 @@ ProgramItem.propTypes = {
 // Component
 //////////////////////////////
 const GridItem = (props) => {
-  const {
-    type,
-    machine,
-    removeMachine,
-    isExpanded
-  } = props;
+  const { type, machine, removeMachine, isExpanded } = props;
 
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = gridItemContentsStyles({ isExpanded });
+  const [myMachine, setMyMachine] = useState({ cpu: 0, memory: 0 });
 
   const handleOptionsClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -94,6 +86,12 @@ const GridItem = (props) => {
     removeMachine(machine.id);
     handleOptionsClose();
   };
+
+  // useEffect(() => {
+  //   // let newMachines = myMachine;
+  //   // newMachines.push({cpu: machine.cpu, memory: machine.memory});
+  //   setMyMachine({cpu: machine.cpu, memory: machine.memory})
+  // }, [machine])
 
   return (
     <Container className={classes.root}>
@@ -166,17 +164,21 @@ const GridItem = (props) => {
             )}
           </Grid>
         </Grid>
+        <Grid item>
+          <span>{machine.cpu}</span>
+          <br/>
+          <span>{machine.memory}</span>
+          {/*<RTChart*/}
+          {/*  fields={['cpu','memory']}*/}
+          {/*  initialData={{cpu: 0, memory: 0}}*/}
+          {/*  maxValues={10}*/}
+          {/*  data = {myMachine}*/}
+          {/*/>*/}
+        </Grid>
       </Grid>
     </Container>
   );
 };
-
-{
-  /*{type === "machine" && <MachineItem {...props} />}*/
-}
-{
-  /*{type === "program" && <ProgramItem {...props} />}*/
-}
 
 //////////////////////////////
 // Connections

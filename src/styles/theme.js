@@ -58,10 +58,7 @@ export const gridLayoutStyles = makeStyles({
   root: {
     height: "calc(100vh - 64px)",
     display: "flex",
-    // height: '100%',
-    backgroundImage:
-      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)",
-  },
+    },
 });
 
 //////////////////////////////
@@ -71,31 +68,18 @@ export const gridItemStyles = makeStyles((theme) => ({
   root: (props) => ({
     borderRadius: 10,
     padding: 10,
-    // position: props.isExpanded ? "fixed!important" : "relative",
     width: "100%",
     height: "100%",
-    // right: props.isExpanded ? 0 : "inherit",
-    // bottom: props.isExpanded ? 0 : "inherit",
-    // top: props.isExpanded ? 0 : "inherit",
-    // left: props.isExpanded ? 0 : "inherit",
-    // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
   }),
 }));
 
 export const gridItemContentsStyles = makeStyles((theme) => ({
   root: (props) => ({
-    // borderRadius: 10,
-    // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     padding: "0!important",
-    // zIndex: props.isExpanded ? '10000!important' : 10,
     height: "100%",
     width: "100%",
     borderRadius: 10,
-    // backgroundColor:  props.isExpanded ? 'blue' : 'red',
     position: "relative",
-    // Could make it fixed, and then pass in position of parent.
-    // top: props.isExpanded ? 0 : 0,
-    // left: props.isExpanded ? 0 : 0,
   }),
   paper: {},
   grid: (props) => ({
@@ -108,6 +92,7 @@ export const gridItemContentsStyles = makeStyles((theme) => ({
   }),
   top: {
     width: "80%!important",
+    height: '10%'
   },
   optionsColumn: {
     display: "flex",
@@ -115,9 +100,6 @@ export const gridItemContentsStyles = makeStyles((theme) => ({
     width: "min-content!important",
   },
   label: {
-    // alignItems: "center",
-    // verticalAlign: "middle",
-    // textAlign: "center"
     display: "flex",
     direction: "row",
   },
@@ -149,6 +131,7 @@ export const layoutStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
+    height: '200rem'
   },
   toolbar: {
     justifyContent: "space-between",

@@ -71,19 +71,6 @@ const BaseGrid = (props) => {
     setAddMachineDialog(false);
   };
 
-  // const handleExpandIndex = (i) => {
-  //   setHidden(
-  //     props.machines.map((m, index) => {
-  //       return index !== i;
-  //     })
-  //   );
-  //   setExpanded(
-  //     props.machines.map((m, index) => {
-  //       return index === i;
-  //     })
-  //   );
-  // };
-
   const handleCollapse = () => {
     setHidden([]);
     setExpanded([]);
@@ -147,7 +134,7 @@ const BaseGrid = (props) => {
         draggableHandle=".draggable"
         bound={false}
         layout={_.sortBy(props.machines, props.sortBy, ["asc"]).map((m, i) => {
-          return { i: m.id, x: i, y: 0, w: 1, h: 1 };
+          return { i: m.id, x: i % 4, y: 0, w: 1, h: 1 };
         })}
       >
         {props.machines.map((machine, i) => {
@@ -159,15 +146,12 @@ const BaseGrid = (props) => {
               })}
               elevation={4}
               key={machine.id}
-              // onClick={(e) => {e.preventDefault(); e.stopPropagation();}}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
               }}
-              // data-grid={{i: machine.id, x: i * 4, y: 0, w: 1, h: 1, static: false }}
             >
               <GridItem
-                // index={i}
                 isExpanded={expanded[i]}
                 type={"machine"}
                 machine={machine}
@@ -221,8 +205,8 @@ const mapStateToProps = (state) => ({
           name: MachineValue.Name,
           id: MachineValue.ID,
           startTime: MachineValue.StartTime,
-          cpu: MachineValue.CPU,
-          memory: MachineValue.Memory,
+          cpu: MachineValue.CPU ? `${MachineValue.CPU.toFixed(2)}%` : '',
+          memory: MachineValue.Memory ? `${MachineValue.Memory.toFixed(2)}%` : '',
           programValues: MachineValue.ProgramValues.map((programValue) => {
             return {
               cpu: `${programValue.CPU.toFixed(2)}%`,

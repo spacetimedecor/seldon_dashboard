@@ -28,6 +28,25 @@ const defaultSettings = [
         Name: "Program 2",
       }
     ]
+  },
+  {
+    Name: "Seldon 1",
+    Programs: [
+      {
+        Name: "Program 1",
+      },
+      {
+        Name: "Program 2",
+      }
+    ]
+  },
+  {
+    Name: "Robot 3",
+    Programs: [
+      {
+        Name: "Program 1",
+      }
+    ]
   }
 ]
 
