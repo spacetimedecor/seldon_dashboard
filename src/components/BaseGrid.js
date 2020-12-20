@@ -147,7 +147,7 @@ const BaseGrid = (props) => {
         draggableHandle=".draggable"
         bound={false}
         layout={_.sortBy(props.machines, props.sortBy, ["asc"]).map((m, i) => {
-          return { i: m.id, x: i, y: 0, w: 2, h: 1 };
+          return { i: m.id, x: i, y: 0, w: 1, h: 1 };
         })}
       >
         {props.machines.map((machine, i) => {
