@@ -1,34 +1,34 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
 import Icon from "@material-ui/core/Icon";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import HomeIcon from "@material-ui/icons/Home";
-import SettingsIcon from "@material-ui/icons/Settings";
 import DesktopMacOutlinedIcon from "@material-ui/icons/DesktopMacOutlined";
 import PropTypes from "prop-types";
-import { layoutStyles } from "../styles/theme";
+import { formControlStyles, layoutStyles } from "../styles/theme";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Container from "@material-ui/core/Container";
 import { ParamsContext } from "./App";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Typography from "@material-ui/core/Typography";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import {setSortBy} from "../store/actions";
 //////////////////////////////
 // Component
 //////////////////////////////
 const Sidebar = (props) => {
   const params = useContext(ParamsContext);
   const classes = layoutStyles();
+  const formControlClasses = formControlStyles();
 
   return (
     <div className={classes.root}>
@@ -62,6 +62,29 @@ const Sidebar = (props) => {
               </Link>
             )}
           </Breadcrumbs>
+          <FormControl
+            variant="filled"
+            className={formControlClasses.formControl}
+          >
+            <InputLabel
+              className={formControlClasses.inputLabel}
+              htmlFor="sort-by"
+            >
+              Sort By
+            </InputLabel>
+            <Select
+              native
+              value={props.sortBy}
+              onChange={(e) => props.setSortBy(e.target.value)}
+            >
+              <option aria-label="None" value="" />
+              <option value={"name"}>Name</option>
+              <option value={"startTime"}>Start Time</option>
+              <option value={"id"}>ID</option>
+              <option value={"cpu"}>CPU Usage</option>
+              <option value={"memory"}>Memory Usage</option>
+            </Select>
+          </FormControl>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -114,9 +137,12 @@ Sidebar.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
   ]).isRequired,
   machines: PropTypes.array,
+  sortBy: PropTypes.string.isRequired,
+  setSortBy: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  sortBy: state.SortBy,
   machines: state.MachineValues
     ? state.MachineValues.map((MachineValue) => {
         return {
@@ -127,4 +153,9 @@ const mapStateToProps = (state) => ({
     : [],
 });
 
-export default connect(mapStateToProps, null)(Sidebar);
+const mapDispatchToProps = {
+  setSortBy,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

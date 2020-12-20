@@ -18,6 +18,11 @@ export const setLocalPollSpeed = (payload) => ({
   payload
 });
 
+export const setSortBy = (payload) => ({
+  type: actionTypes.SET_SORT_BY,
+  payload
+});
+
 // To server
 export const setPollSpeed = (payload) => ({
   type: actionTypes.SET_POLL_SPEED,

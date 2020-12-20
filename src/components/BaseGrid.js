@@ -24,6 +24,7 @@ import AddMachineDialog from "./AddMachineDialog";
 import clsx from "clsx";
 import { ParamsContext } from "./App";
 import { useHistory } from "react-router-dom";
+import _ from "lodash";
 
 //////////////////////////////
 // Component
@@ -86,7 +87,7 @@ const BaseGrid = (props) => {
   const handleCollapse = () => {
     setHidden([]);
     setExpanded([]);
-    history.push('/');
+    history.push("/");
   };
 
   const handleExpandId = (id) => {
@@ -145,12 +146,13 @@ const BaseGrid = (props) => {
         // height={1000}
         autoSize={false}
         draggableHandle=".draggable"
-        // isResizable={false}
-        // isBounded={true}
-        // preventCollision
-        // onLayoutChange={this.onLayoutChange}
+        bound={false}
+        layout={_.sortBy(props.machines, props.sortBy, ["asc"]).map((m, i) => {
+          return { i: m.id, x: i, y: 0, w: 2, h: 1 };
+        })}
       >
         {props.machines.map((machine, i) => {
+          console.log(machine, i, props.sortBy);
           return (
             <Paper
               className={clsx(classes.root, {
@@ -158,19 +160,19 @@ const BaseGrid = (props) => {
                 ["expanded"]: expanded[i],
               })}
               elevation={4}
-              key={`machine-${machine.id}`}
+              key={machine.id}
               // onClick={(e) => {e.preventDefault(); e.stopPropagation();}}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
               }}
+              // data-grid={{i: machine.id, x: i * 4, y: 0, w: 1, h: 1, static: false }}
             >
               <GridItem
-                index={i}
+                // index={i}
                 isExpanded={expanded[i]}
                 type={"machine"}
                 machine={machine}
-                data-grid={{ x: i * 4, y: 0, w: 1, h: 1, static: false }}
               />
             </Paper>
           );
@@ -198,6 +200,7 @@ BaseGrid.propTypes = {
   updateMachineValues: PropTypes.func.isRequired,
   connection: PropTypes.bool.isRequired,
   localPollSpeed: PropTypes.number.isRequired,
+  sortBy: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = {
@@ -213,6 +216,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   connection: state.Connection,
   localPollSpeed: state.LocalPollSpeed,
+  sortBy: state.SortBy,
   machines: state.MachineValues
     ? state.MachineValues.map((MachineValue) => {
         return {

@@ -187,7 +187,7 @@ GridItem.propTypes = {
   program: PropTypes.object,
   removeMachine: PropTypes.func.isRequired,
   isExpanded: PropTypes.bool,
-  index: PropTypes.number.isRequired,
+  // index: PropTypes.number.isRequired,
 };
 
 const mapDispatchToProps = {

@@ -34,8 +34,8 @@ import { defaultTheme } from "./styles/theme";
 //////////////////////////////
 // Instances
 //////////////////////////////
-// const middleware = [socket];
-const middleware = [logger, socket];
+const middleware = [socket];
+// const middleware = [logger, socket];
 const theme = createMuiTheme(defaultTheme);
 const store = createStore(
   reducers,

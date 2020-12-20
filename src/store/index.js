@@ -1,5 +1,6 @@
 export const defaultState = {
   MachineValues: [],
   Connection: true,
-  LocalPollSpeed: 500
+  LocalPollSpeed: 500,
+  SortBy: ""
 }

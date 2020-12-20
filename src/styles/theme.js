@@ -31,29 +31,42 @@ export const defaultTheme = {
       primary: grey[700],
     },
     primary: {
-      main: indigo["A700"],
+      main: grey[700],
     },
     secondary: {
       main: grey[700],
     },
   },
 };
+//////////////////////////////
+// Sort By Form Control
+//////////////////////////////
+export const formControlStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  inputLabel: {
+    // textColor: 'white'
+  }
+}));
 
+//////////////////////////////
+// Grid Layout
+//////////////////////////////
 export const gridLayoutStyles = makeStyles({
   root: {
     height: "calc(100vh - 64px)",
     display: "flex",
     // height: '100%',
-    //   backgroundImage:
-    //     "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)"
-    //
+    backgroundImage:
+      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)",
   },
 });
 
 //////////////////////////////
 // Grid item
 //////////////////////////////
-
 export const gridItemStyles = makeStyles((theme) => ({
   root: (props) => ({
     borderRadius: 10,
@@ -109,7 +122,6 @@ export const gridItemContentsStyles = makeStyles((theme) => ({
     direction: "row",
   },
 }));
-
 //////////////////////////////
 // Drawer
 //////////////////////////////
@@ -139,7 +151,7 @@ export const layoutStyles = makeStyles((theme) => ({
     display: "flex",
   },
   toolbar: {
-    justifyContent: "center",
+    justifyContent: "space-between",
     width: "100%",
     display: "flex",
   },
