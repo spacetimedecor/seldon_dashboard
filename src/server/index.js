@@ -17,6 +17,7 @@ io.on("connection", (socket) => {
   socket.on("TO_SERVER", (e) => { console.log("TO_SERVER", e); });
   socket.on("SET_POLL_SPEED", (e) => { machineManager.setPollSpeed(e) });
   socket.on("ADD_MACHINE", (e) => { machineManager.addMachine(e) });
+  socket.on("REMOVE_MACHINE", (e) => { machineManager.removeMachine(e) });
 });
 
 server.listen(PORT, () => {

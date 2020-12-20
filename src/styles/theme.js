@@ -1,8 +1,8 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import { makeStyles } from '@material-ui/core/styles';
-import {blue, green, white, indigo, grey} from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
+import { blue, green, indigo, grey } from "@material-ui/core/colors";
 
 //////////////////////////////
 // Defaults
@@ -25,54 +25,125 @@ export const defaultTheme = {
   },
   palette: {
     background: {
-      default: grey[300]
+      default: grey[300],
     },
     text: {
-      primary: grey[700]
+      primary: grey[700],
     },
     primary: {
-      main: indigo['A700'],
+      main: indigo["A700"],
     },
     secondary: {
-      main: blue[500],
+      main: grey[700],
     },
   },
 };
 
+export const gridLayoutStyles = makeStyles({
+  root: {
+    height: "calc(100vh - 64px)",
+    // height: '100%',
+    //   backgroundImage:
+    //     "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)"
+    //
+  },
+});
+
+//////////////////////////////
+// Grid item
+//////////////////////////////
+
+export const gridItemStyles = makeStyles({
+  root: {
+    borderRadius: 10,
+    padding: 10,
+    // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+  },
+});
+
+export const gridItemContentsStyles = makeStyles((theme) => ({
+  root: {
+    // borderRadius: 10,
+    // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    padding: "0!important",
+    zIndex: 10,
+  },
+  paper: {},
+  grid: {
+    // padding: "1rem",
+    display: "flex",
+    flexDirection: "row",
+    draggable: "true",
+  },
+  top: {
+    width: "80%!important",
+  },
+  optionsColumn: {
+    display: "flex",
+    flexDirection: "column",
+    width: "min-content!important",
+  },
+  label: {
+    // alignItems: "center",
+    // verticalAlign: "middle",
+    // textAlign: "center"
+    display: "flex",
+    direction: "row",
+  },
+}));
+
 //////////////////////////////
 // Drawer
 //////////////////////////////
-const drawerWidth = 200;
+const drawerWidth = 180;
 
-export const drawerStyles = makeStyles((theme) => ({
+export const layoutStyles = makeStyles((theme) => ({
   imageIcon: {
-    height: '100%',
-    width: 'auto'
+    height: "100%",
+    width: "auto",
   },
   iconRoot: {
-    textAlign: 'left',
+    textAlign: "left",
+    position: "absolute",
+    top: "calc(50% - 0.85rem)",
+    left: "1.15rem",
     // width: '100%',
     // overflow: 'show'
   },
+  breadcrumbs: {
+    justifyContent: "center!important",
+    color: "white",
+  },
+  listItemText: {
+    color: grey[700],
+  },
   root: {
-    display: 'flex'
+    display: "flex",
+  },
+  toolbar: {
+    justifyContent: "center",
+    width: "100%",
+    display: "flex",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    justifyContent: "center",
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
     // backgroundColor: grey[300]
   },
   drawerContainer: {
-    overflow: 'auto',
+    overflow: "auto",
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: 0,
+    height: "100vh",
   },
 }));

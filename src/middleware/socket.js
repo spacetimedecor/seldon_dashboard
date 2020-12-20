@@ -4,7 +4,7 @@
 import * as actions from "../store/actions";
 import {
   ADD_MACHINE,
-  RECEIVE_MACHINE_UPDATES, SET_LOCAL_POLL_SPEED, SET_POLL_SPEED, TO_SERVER,
+  RECEIVE_MACHINE_UPDATES, REMOVE_MACHINE, SET_LOCAL_POLL_SPEED, SET_POLL_SPEED, TO_SERVER,
   WS_CONNECT,
   WS_DISCONNECT, WS_DISCONNECTED, WS_SETUP
 } from "../store/actionTypes";
@@ -21,14 +21,6 @@ const socketMiddleware = () => {
   let socket = null;
 
   // Callbacks
-  const disconnect = () => {
-    socket?.removeAllListeners();
-    socket?.disconnect();
-    socket?.close();
-    socket?.destroy();
-    socket = null;
-  }
-
   const onMessage = (store) => (event) => {
     switch (event.type) {
       case RECEIVE_MACHINE_UPDATES:
@@ -63,6 +55,9 @@ const socketMiddleware = () => {
         break;
       case ADD_MACHINE:
         socket?.emit(ADD_MACHINE, action.payload);
+        break;
+      case REMOVE_MACHINE:
+        socket?.emit(REMOVE_MACHINE, action.payload);
         break;
       case TO_SERVER:
         socket?.emit(TO_SERVER, action.payload);

@@ -2,17 +2,33 @@
 // Imports
 //////////////////////////////
 import "../styles/App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { wsConnect, wsDisconnect, wsSetup } from "../store/actions";
 import { connect } from "react-redux";
 import { URL } from "../config";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router } from "react-router-dom";
-import Routing from "../routing.js";
+import { useRouteMatch } from "react-router-dom";
+import Layout from "./Layout";
+import BaseGrid from "./BaseGrid";
+
+export const ParamsContext = React.createContext({
+  machine: null,
+  program: null,
+});
+
 //////////////////////////////
 // Component
 //////////////////////////////
 function App(props) {
+  let currentRoute = useRouteMatch("/:machine/:program?");
+  const [currentMachine, setCurrentMachine] = useState(null);
+  const [currentProgram, setCurrentProgram] = useState(null);
+
+  useEffect(() => {
+    setCurrentMachine(currentRoute ? currentRoute.params.machine : null);
+    setCurrentProgram(currentRoute ? currentRoute.params.program : null);
+  }, [currentRoute]);
+
   const disconnectFunc = () => {
     props.wsDisconnect(URL);
   };
@@ -30,9 +46,18 @@ function App(props) {
 
   return (
     <div className="App">
-      <Router>
-        <Routing />
-      </Router>
+      <ParamsContext.Provider
+        value={{
+          machine: currentMachine,
+          program: currentProgram,
+        }}
+      >
+        <Layout>
+          <BaseGrid>
+            test
+          </BaseGrid>
+        </Layout>
+      </ParamsContext.Provider>
     </div>
   );
 }
