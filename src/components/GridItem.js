@@ -23,6 +23,7 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import Icon from "@material-ui/core/Icon";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import {addMachine, removeMachine} from "../store/actions";
 //////////////////////////////
 // Parts
 //////////////////////////////
@@ -58,7 +59,7 @@ ProgramItem.propTypes = {
 // Component
 //////////////////////////////
 const GridItem = (props) => {
-  const { type } = props;
+  const { type, machine, removeMachine } = props;
   const classes = gridItemContentsStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -69,6 +70,11 @@ const GridItem = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleRemoveMachine = () => {
+    removeMachine(machine.id);
+    handleClose();
+  }
 
   return (
     <Container
@@ -95,7 +101,7 @@ const GridItem = (props) => {
           <Grid item>
             <Box ml={'0.5rem'}>
               <Typography>
-                {type === "machine" ? props.machine.name : props.program.name}
+                {type === "machine" ? machine.name : props.program.name}
               </Typography>
             </Box>
           </Grid>
@@ -117,8 +123,8 @@ const GridItem = (props) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Remove</MenuItem>
-              <MenuItem onClick={handleClose}>Duplicate</MenuItem>
+              <MenuItem onClick={handleRemoveMachine}>Remove</MenuItem>
+              {/*<MenuItem onClick={handleClose}>Duplicate</MenuItem>*/}
             </Menu>
           </Grid>
           <Grid item  >
@@ -150,6 +156,11 @@ GridItem.propTypes = {
   type: PropTypes.string.isRequired,
   machine: PropTypes.object,
   program: PropTypes.object,
+  removeMachine: PropTypes.func.isRequired
 };
 
-export default connect(null, null)(GridItem);
+const mapDispatchToProps = {
+  removeMachine
+};
+
+export default connect(null, mapDispatchToProps)(GridItem);

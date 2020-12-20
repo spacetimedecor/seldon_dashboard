@@ -46,17 +46,14 @@ module.exports = class Machine {
     }
   }
 
-  static addMachine(machineSetting){
-    console.log("ADD_MACHINE", machineSetting);
+  static addMachine(name){
+    console.log("ADD_MACHINE", name);
     Machine.machines =
       [
         ...Machine.machines,
         new Machine(
-          machineSetting !== null ?
-            machineSetting
-              :
             {
-              Name: `Machine ${Machine.machines.length + 1}`,
+              Name: name ? name : `Machine ${Machine.machines.length + 1}`,
               Programs: [
                 {
                   Name: 'Program 1'
@@ -65,6 +62,10 @@ module.exports = class Machine {
             }
           )
       ]
+  }
+
+  static removeMachine(id){
+    Machine.machines = Machine.machines.filter(m => m.machineSetting.ID !== id)
   }
 
   static stopMachines(){

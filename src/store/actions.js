@@ -28,3 +28,8 @@ export const addMachine = payload => ({
   type: actionTypes.ADD_MACHINE,
   payload
 });
+
+export const removeMachine = payload => ({
+  type: actionTypes.REMOVE_MACHINE,
+  payload
+});

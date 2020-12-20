@@ -41,18 +41,19 @@ export const defaultTheme = {
 
 export const gridLayoutStyles = makeStyles({
   root: {
-    height: 'calc(100vh - 64px)',
+    height: "calc(100vh - 64px)",
     // height: '100%',
-    backgroundImage:
-      "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)"
-  }
-})
+    //   backgroundImage:
+    //     "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)"
+    //
+  },
+});
 
 //////////////////////////////
 // Grid item
 //////////////////////////////
 
-export const gridItemStyles = makeStyles ({
+export const gridItemStyles = makeStyles({
   root: {
     borderRadius: 10,
     padding: 10,
@@ -71,16 +72,16 @@ export const gridItemContentsStyles = makeStyles((theme) => ({
   grid: {
     // padding: "1rem",
     display: "flex",
-    flexDirection: 'row',
-    draggable: 'true'
+    flexDirection: "row",
+    draggable: "true",
   },
   top: {
-    width:'80%!important'
+    width: "80%!important",
   },
   optionsColumn: {
     display: "flex",
-    flexDirection: 'column',
-    width: 'min-content!important'
+    flexDirection: "column",
+    width: "min-content!important",
   },
   label: {
     // alignItems: "center",

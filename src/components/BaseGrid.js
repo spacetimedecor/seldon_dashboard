@@ -21,6 +21,7 @@ import GridItem from "./GridItem";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Container from "@material-ui/core/Container";
+import AddMachineDialog from "./AddMachineDialog";
 //////////////////////////////
 // Component
 //////////////////////////////
@@ -35,21 +36,32 @@ const BaseGrid = (props) => {
 
   const [menuLocation, setMenuLocation] = React.useState(initialState);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [addMachineDialog, setAddMachineDialog] = React.useState(false);
 
-  const handleClick = (event) => {
-    console.log(1);
-    event.preventDefault();
-    event.stopPropagation();
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setMenuLocation({
-      mouseX: event.clientX - 2,
-      mouseY: event.clientY - 4,
+      mouseX: e.clientX - 2,
+      mouseY: e.clientY - 4,
     });
     setMenuOpen(!menuOpen);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setMenuLocation(initialState);
+    switch(e.target.textContent){
+      case 'Add Machine':
+        setAddMachineDialog(true);
+        break;
+    }
   };
+
+  const handleCloseAddMachine = () => {
+    setAddMachineDialog(false);
+  }
 
   return (
     <Container
@@ -108,6 +120,7 @@ const BaseGrid = (props) => {
           );
         })}
       </ReactGridLayout>
+      <AddMachineDialog open={addMachineDialog} handleClose={handleCloseAddMachine} />
     </Container>
   );
 };

@@ -20,4 +20,5 @@ module.exports.connect = (client) => {
 };
 module.exports.disconnect = () => { Machine.stopMachines(); }
 module.exports.setPollSpeed = (to) => { Machine.setPollSpeed(to); }
-module.exports.addMachine = (machineSetting) => { Machine.addMachine(machineSetting); }
+module.exports.addMachine = (name) => { Machine.addMachine(name); }
+module.exports.removeMachine = (id) => { Machine.removeMachine(id); }
