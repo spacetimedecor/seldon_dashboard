@@ -53,7 +53,7 @@ function App(props) {
         }}
       >
         <Layout>
-          <BaseGrid>
+          <BaseGrid >
             test
           </BaseGrid>
         </Layout>

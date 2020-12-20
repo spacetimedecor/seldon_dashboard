@@ -1,7 +1,7 @@
 //////////////////////////////
 // Imports
 //////////////////////////////
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ReactGridLayout from "react-grid-layout";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -15,19 +15,23 @@ import {
   wsSetup,
 } from "../store/actions";
 import Paper from "@material-ui/core/Paper";
-import withStyles from "@material-ui/core/styles/withStyles";
 import { gridItemStyles, gridLayoutStyles } from "../styles/theme";
 import GridItem from "./GridItem";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Container from "@material-ui/core/Container";
 import AddMachineDialog from "./AddMachineDialog";
+import clsx from "clsx";
+import { ParamsContext } from "./App";
+import { useHistory } from "react-router-dom";
+
 //////////////////////////////
 // Component
 //////////////////////////////
 const BaseGrid = (props) => {
   const classes = gridItemStyles();
   const gridLayoutClasses = gridLayoutStyles();
+  const history = useHistory();
 
   const initialState = {
     mouseX: null,
@@ -37,6 +41,9 @@ const BaseGrid = (props) => {
   const [menuLocation, setMenuLocation] = React.useState(initialState);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [addMachineDialog, setAddMachineDialog] = React.useState(false);
+  const [hidden, setHidden] = React.useState([]);
+  const [expanded, setExpanded] = React.useState([]);
+  const { machine, program } = useContext(ParamsContext);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -52,8 +59,8 @@ const BaseGrid = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setMenuLocation(initialState);
-    switch(e.target.textContent){
-      case 'Add Machine':
+    switch (e.target.textContent) {
+      case "Add Machine":
         setAddMachineDialog(true);
         break;
     }
@@ -61,7 +68,51 @@ const BaseGrid = (props) => {
 
   const handleCloseAddMachine = () => {
     setAddMachineDialog(false);
-  }
+  };
+
+  // const handleExpandIndex = (i) => {
+  //   setHidden(
+  //     props.machines.map((m, index) => {
+  //       return index !== i;
+  //     })
+  //   );
+  //   setExpanded(
+  //     props.machines.map((m, index) => {
+  //       return index === i;
+  //     })
+  //   );
+  // };
+
+  const handleCollapse = () => {
+    setHidden([]);
+    setExpanded([]);
+    history.push('/');
+  };
+
+  const handleExpandId = (id) => {
+    if (id) {
+      setHidden(
+        props.machines.map((m, index) => {
+          return m.id !== id;
+        })
+      );
+      setExpanded(
+        props.machines.map((m, index) => {
+          return m.id === id;
+        })
+      );
+    } else {
+      handleCollapse();
+    }
+  };
+
+  useEffect(() => {
+    if (machine) {
+      handleExpandId(machine);
+    } else {
+      handleCollapse();
+    }
+  }, [machine]);
 
   return (
     <Container
@@ -102,7 +153,10 @@ const BaseGrid = (props) => {
         {props.machines.map((machine, i) => {
           return (
             <Paper
-              className={classes.root}
+              className={clsx(classes.root, {
+                ["itemHidden"]: hidden[i] === true,
+                ["expanded"]: expanded[i],
+              })}
               elevation={4}
               key={`machine-${machine.id}`}
               // onClick={(e) => {e.preventDefault(); e.stopPropagation();}}
@@ -112,6 +166,8 @@ const BaseGrid = (props) => {
               }}
             >
               <GridItem
+                index={i}
+                isExpanded={expanded[i]}
                 type={"machine"}
                 machine={machine}
                 data-grid={{ x: i * 4, y: 0, w: 1, h: 1, static: false }}
@@ -120,7 +176,10 @@ const BaseGrid = (props) => {
           );
         })}
       </ReactGridLayout>
-      <AddMachineDialog open={addMachineDialog} handleClose={handleCloseAddMachine} />
+      <AddMachineDialog
+        open={addMachineDialog}
+        handleClose={handleCloseAddMachine}
+      />
     </Container>
   );
 };

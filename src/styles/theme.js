@@ -42,6 +42,7 @@ export const defaultTheme = {
 export const gridLayoutStyles = makeStyles({
   root: {
     height: "calc(100vh - 64px)",
+    display: "flex",
     // height: '100%',
     //   backgroundImage:
     //     "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=)"
@@ -53,28 +54,45 @@ export const gridLayoutStyles = makeStyles({
 // Grid item
 //////////////////////////////
 
-export const gridItemStyles = makeStyles({
-  root: {
+export const gridItemStyles = makeStyles((theme) => ({
+  root: (props) => ({
     borderRadius: 10,
     padding: 10,
+    // position: props.isExpanded ? "fixed!important" : "relative",
+    width: "100%",
+    height: "100%",
+    // right: props.isExpanded ? 0 : "inherit",
+    // bottom: props.isExpanded ? 0 : "inherit",
+    // top: props.isExpanded ? 0 : "inherit",
+    // left: props.isExpanded ? 0 : "inherit",
     // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
-  },
-});
+  }),
+}));
 
 export const gridItemContentsStyles = makeStyles((theme) => ({
-  root: {
+  root: (props) => ({
     // borderRadius: 10,
     // boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     padding: "0!important",
-    zIndex: 10,
-  },
+    // zIndex: props.isExpanded ? '10000!important' : 10,
+    height: "100%",
+    width: "100%",
+    borderRadius: 10,
+    // backgroundColor:  props.isExpanded ? 'blue' : 'red',
+    position: "relative",
+    // Could make it fixed, and then pass in position of parent.
+    // top: props.isExpanded ? 0 : 0,
+    // left: props.isExpanded ? 0 : 0,
+  }),
   paper: {},
-  grid: {
-    // padding: "1rem",
+  grid: (props) => ({
+    padding: "0.5rem",
     display: "flex",
+    borderRadius: 10,
+    height: "100%",
+    width: "100%",
     flexDirection: "row",
-    draggable: "true",
-  },
+  }),
   top: {
     width: "80%!important",
   },

@@ -9,6 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/styles": "latest",
     "@reduxjs/toolkit": "^1.5.0",
+    "classnames": "^2.2.6",
     "clsx": "latest",
     "eslint": "latest",
     "express": "latest",

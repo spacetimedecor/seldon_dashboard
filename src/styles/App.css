@@ -7,3 +7,20 @@ a:-webkit-any-link {
     text-decoration: underline;
     cursor: pointer;
 }
+
+/*.OrderFirst {*/
+/*    order: 1!important;*/
+/*    -webkit-order: 1!important;*/
+/*    -ms-order: 1!important;*/
+/*}*/
+.itemHidden {
+    visibility: hidden;
+}
+
+.expanded {
+
+    width: calc(100% - 20px)!important;
+    height: calc(100% - 20px)!important;
+    transform: translate(10px, 10px)!important;
+    transition: transform 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out !important;
+}

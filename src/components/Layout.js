@@ -48,6 +48,9 @@ const Sidebar = (props) => {
             classes={{ root: classes.breadcrumbs }}
             aria-label="breadcrumb"
           >
+            <Link to={`/`} color="inherit">
+              Home
+            </Link>
             {params.machine && (
               <Link to={`/${params.machine}`} color="inherit">
                 {params.machine}
