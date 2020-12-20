@@ -87,6 +87,7 @@
     bottom: 0;
     right: 0;
     cursor: se-resize;
+    opacity: 0;
 }
 .react-grid-item > .react-resizable-handle.react-resizable-handle-nw {
     top: 0;
