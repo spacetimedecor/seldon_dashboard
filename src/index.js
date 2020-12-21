@@ -39,12 +39,12 @@ const middleware = [logger, socket];
 const theme = createMuiTheme(defaultTheme);
 const store = createStore(
   reducers,
-  defaultState,
+  defaultState
   // applyMiddleware(logger)
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+//   compose(
+//     applyMiddleware(...middleware),
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//   )
 );
 
 //////////////////////////////
